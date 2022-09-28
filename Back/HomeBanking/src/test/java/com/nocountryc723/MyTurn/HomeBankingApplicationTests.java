@@ -1,4 +1,4 @@
-package com.nocountryc723.HomeBanking;
+package com.nocountryc723.MyTurn;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
