@@ -1,7 +1,12 @@
-import '../styles/globals.css'
+import ReactQueryContainer from "../containers/ReactQueryContainer";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return (
+    <ReactQueryContainer dehydratedState={pageProps.dehydratedState}>
+      <Component {...pageProps} />
+    </ReactQueryContainer>
+  );
 }
 
-export default MyApp
+export default MyApp;
