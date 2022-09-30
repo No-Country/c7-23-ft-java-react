@@ -3,12 +3,16 @@ package com.miturno.models;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -19,7 +23,7 @@ import org.hibernate.annotations.Where;
 import com.miturno.models.enums.DocumentTipe;
 
 import lombok.Data;
-
+ 
 @Entity
 @Data
 @Table(name = "users")
@@ -36,7 +40,6 @@ public class User {
 
 	@Column(length = 40, nullable = false)
 	private String lastName;
-	
 	
 	@Enumerated(value = EnumType.STRING)
 	private DocumentTipe DocumentTipe;

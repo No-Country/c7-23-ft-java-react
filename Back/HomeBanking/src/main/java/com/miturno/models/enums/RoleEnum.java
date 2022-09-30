@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nocountryc723.HomeBanking.Models.enums;
+package com.miturno.models.enums;
 
 /**
  *
@@ -12,7 +12,5 @@ package com.nocountryc723.HomeBanking.Models.enums;
 public enum RoleEnum {
     ADMIN,
     WORKER,
-    DOCTOR,
-    PATIENT
-    
+    DOCTOR
 }
