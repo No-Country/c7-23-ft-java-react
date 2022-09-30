@@ -8,11 +8,11 @@
 		<version>2.7.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.no-country-c7-23</groupId>
-	<artifactId>HomeBanking</artifactId>
+	<groupId>com.miturno</groupId>
+	<artifactId>MiTurno</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>HomeBanking</name>
-	<description>Demo project for Spring Boot</description>
+	<name>MiTurno</name>
+	<description>una descripción más bonita WIP</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
