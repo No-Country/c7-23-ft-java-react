@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.7.2",
+    "cssnano": "^5.1.13",
     "daisyui": "^2.31.0",
     "next": "12.3.1",
     "react": "18.2.0",
@@ -17,6 +18,7 @@
     "zustand": "^4.1.1"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10.4.12",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
