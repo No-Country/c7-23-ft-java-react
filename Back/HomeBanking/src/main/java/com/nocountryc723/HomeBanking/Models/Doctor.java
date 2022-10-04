@@ -42,7 +42,7 @@ public class Doctor /* extends User */{
     
   //  @ManyToMany
   //  private Speciality speciality_id;
-
+  //  private Doctor doctor_id;
     
     
 }
