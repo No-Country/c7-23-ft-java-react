@@ -35,9 +35,11 @@ export default function Login() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="w-full h-screen grid md:grid-cols-2 items-center justify-items-center">
-        <div className="w-auto max-w-[228px]">
-          <h1 className="text-2xl font-semibold mb-5">Welcome to My turn</h1>
-          <form>
+        <div className="w-full max-w-[300px]">
+          <h1 className="text-2xl font-semibold mb-4 text-center">
+            Welcome to My turn
+          </h1>
+          <form className="font-medium">
             <label>
               Email
               <input
@@ -57,12 +59,12 @@ export default function Login() {
                   className="form-input"
                   ref={refElement}
                 />
-                <button
-                  className="w-[20%] h-5 absolute top-2 right-2"
+                <div
+                  className="w-[20%] h-5 absolute top-3 right-2 cursor-pointer"
                   onClick={showPassword}
                 >
                   <Image alt="image of eye" src={showEye} layout="fill" />
-                </button>
+                </div>
               </div>
             </label>
             <label>
@@ -70,7 +72,7 @@ export default function Login() {
               <select
                 defaultValue="Role"
                 required
-                className="form-select rounded-xl w-full mb-3"
+                className="form-select rounded-xl w-full mb-4"
               >
                 <option value="Role" disabled>
                   Role
@@ -81,7 +83,7 @@ export default function Login() {
               </select>
             </label>
 
-            <button className="btn btn-primary rounded-xl w-full">
+            <button type="summit" className="btn btn-primary rounded-xl w-full">
               Log in
             </button>
           </form>
