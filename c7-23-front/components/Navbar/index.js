@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Navbar() {
   return (
     <div className="navbar shadow-sm">
@@ -24,13 +26,16 @@ export default function Navbar() {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a>Home</a>
+              <Link href="/">Home</Link>
             </li>
             <li>
               <a>Services</a>
             </li>
             <li>
               <a>Contact</a>
+            </li>
+            <li>
+              <Link href="/login">Login</Link>
             </li>
           </ul>
         </div>
