@@ -12,6 +12,12 @@ export default function Footer() {
       </div>
       <div>
         <p>Copyright © 2022 - All right reserved</p>
+        <p>
+          <a href="https://www.freepik.es/vector-gratis/paciente-dibujado-mano-plana-tomando-examen-medico_12810348.htm#page=2&query=doctor&position=1&from_view=search&track=sph">
+            Imagen de pikisuperstar
+          </a>{" "}
+          en Freepik
+        </p>
       </div>
     </footer>
   );

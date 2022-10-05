@@ -5,6 +5,7 @@
 @layer base {
   html {
     font-family: "Nunito", sans-serif;
+    scroll-behavior: smooth;
   }
 }
 

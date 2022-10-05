@@ -29,10 +29,13 @@ export default function Navbar() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <a>Services</a>
+              <a href="#services">Services</a>
             </li>
             <li>
-              <a>Contact</a>
+              <a href="#about">About us</a>
+            </li>
+            <li>
+              <a href="#contact">Contact</a>
             </li>
             <li>
               <a>Appointment</a>
@@ -44,7 +47,7 @@ export default function Navbar() {
         </div>
       </div>
       <div className="navbar-center lg:navbar-start">
-        <a className="cursor-pointer normal-case text-xl">My turn</a>
+        <a className="normal-case text-xl">My turn</a>
       </div>
       <div className="hidden lg:flex  navbar-end ">
         <ul className="flex items-center gap-3 font-medium">
@@ -52,13 +55,13 @@ export default function Navbar() {
             <Link href="/">Home</Link>
           </li>
           <li>
-            <a>Services</a>
+            <a href="#services">Services</a>
+          </li>
+          <li className="min-w-[74px]">
+            <a href="#about">About us</a>
           </li>
           <li>
-            <a>About us</a>
-          </li>
-          <li>
-            <a>Contact</a>
+            <a href="#contact">Contact</a>
           </li>
           <li>
             <button className="btn btn-primary rounded-xl">Appointment</button>

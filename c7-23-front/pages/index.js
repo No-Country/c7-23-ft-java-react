@@ -2,7 +2,9 @@ import Head from "next/head";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer/index";
 import Hero from "../components/Hero/Hero";
-import Services from "../components/Services.js/Services";
+import Services from "../components//Services/index";
+import About from "../components/About";
+import Contact from "../components/Contact";
 
 export default function Home() {
   return (
@@ -16,6 +18,8 @@ export default function Home() {
 
       <Hero />
       <Services />
+      <About />
+      <Contact />
 
       <Footer />
     </div>
