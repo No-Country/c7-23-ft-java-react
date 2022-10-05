@@ -1,7 +1,9 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
 import Image from "next/image";
 import Head from "next/head";
+
+import Navbar from "../../components/Navbar";
 
 import Lines from "../../public/assets/images/lines.png";
 import Doctor from "../../public/assets/images/doctor.png";
@@ -34,6 +36,7 @@ export default function Login() {
         <meta name="description" content="My turn app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Navbar />
       <div className="w-full h-screen grid md:grid-cols-2 items-center justify-items-center">
         <div className="w-full max-w-[300px]">
           <h1 className="text-2xl font-semibold mb-4 text-center">
@@ -91,7 +94,7 @@ export default function Login() {
             Don´t have an account? <a className="link link-primary">Sing up</a>
           </p>
         </div>
-        <div className="w-full h-full md:flex hidden relative bg-[#181A2A] justify-center items-center">
+        <div className="w-full h-full md:flex hidden relative  bg-[#181A2A] justify-center items-center">
           <Image
             className="-ml-4"
             alt="line"

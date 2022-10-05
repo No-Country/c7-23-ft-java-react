@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <div className="navbar shadow-sm">
-      <div className="navbar-start w-auto">
+    <div className="navbar shadow-sm lg:px-8 fixed top-0 z-50 bg-white">
+      <div className="navbar-start lg:hidden">
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost btn-circle">
             <svg
@@ -35,13 +35,41 @@ export default function Navbar() {
               <a>Contact</a>
             </li>
             <li>
+              <a>Appointment</a>
+            </li>
+            <li>
               <Link href="/login">Login</Link>
             </li>
           </ul>
         </div>
       </div>
-      <div className="absolute right-[calc(50%-32px)]">
+      <div className="navbar-center lg:navbar-start">
         <a className="cursor-pointer normal-case text-xl">My turn</a>
+      </div>
+      <div className="hidden lg:flex  navbar-end ">
+        <ul className="flex items-center gap-3 font-medium">
+          <li>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
+            <a>Services</a>
+          </li>
+          <li>
+            <a>About us</a>
+          </li>
+          <li>
+            <a>Contact</a>
+          </li>
+          <li>
+            <button className="btn btn-primary rounded-xl">Appointment</button>
+          </li>
+          <li>
+            <button className="btn btn-primary rounded-xl">
+              {" "}
+              <Link href="/login">Login</Link>
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
   );
