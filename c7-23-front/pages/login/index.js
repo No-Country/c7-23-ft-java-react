@@ -3,8 +3,6 @@ import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import Head from "next/head";
 
-import Navbar from "../../components/Navbar";
-
 import Lines from "../../public/assets/images/lines.png";
 import Doctor from "../../public/assets/images/doctor.png";
 import StethoscopeIcon from "../../public/assets/icons/stethoscopeIcon.svg";
@@ -38,7 +36,7 @@ export default function Login() {
         <meta name="description" content="My turn app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="absolute h-14 w-14 top-6 cursor-pointer">
+      <div className="absolute h-12 w-11 top-6 cursor-pointer">
         <Link href="/">
           <Image alt="back icon" layout="fill" src={BackIcon} />
         </Link>

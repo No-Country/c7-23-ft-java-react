@@ -15,8 +15,8 @@ export default function Services() {
             <figure className="h-14 w-14 mt-3 ">
               <Image alt="clinic icon" layout="fixed" src={Doctor} />
             </figure>
-            <div class="card-body items-center text-center">
-              <h2 class="card-title">Doctors</h2>
+            <div className="card-body items-center text-center">
+              <h2 className="card-title">Doctors</h2>
               <p>With the best doctors in one place</p>
             </div>
           </div>
@@ -26,8 +26,8 @@ export default function Services() {
             <figure className="h-14 w-14 mt-3">
               <Image alt="clinic icon" layout="fixed" src={Clinic} />
             </figure>
-            <div class="card-body items-center text-center">
-              <h2 class="card-title">Clinics</h2>
+            <div className="card-body items-center text-center">
+              <h2 className="card-title">Clinics</h2>
               <p>We have facilities to offer you the best care</p>
             </div>
           </div>
@@ -37,8 +37,8 @@ export default function Services() {
             <figure className="h-14 w-14 mt-3">
               <Image alt="clinic icon" layout="fixed" src={Labs} />
             </figure>
-            <div class="card-body items-center text-center">
-              <h2 class="card-title">Labs</h2>
+            <div className="card-body items-center text-center">
+              <h2 className="card-title">Labs</h2>
               <p>Get your exams fast</p>
             </div>
           </div>
@@ -48,8 +48,8 @@ export default function Services() {
             <figure className="h-14 w-14 mt-3">
               <Image alt="clinic icon" layout="fixed" src={Ambulance} />
             </figure>
-            <div class="card-body items-center text-center">
-              <h2 class="card-title">Emergency</h2>
+            <div className="card-body items-center text-center">
+              <h2 className="card-title">Emergency</h2>
               <p>With attention 24 hours</p>
             </div>
           </div>
