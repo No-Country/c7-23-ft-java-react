@@ -1,10 +1,7 @@
-import Navbar from "../Navbar";
-
 export default function Layout({ children }) {
   return (
-    <>
-      <Navbar />
+    <div data-theme="corporate">
       <main>{children}</main>
-    </>
+    </div>
   );
 }
