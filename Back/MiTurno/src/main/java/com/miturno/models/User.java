@@ -1,5 +1,10 @@
 package com.miturno.models;
 
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Email;
+
+
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -31,22 +36,30 @@ import lombok.Data;
 @Where(clause = "deleted=false")
 public class User {
 
+
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank(message = "Name cannot be null")
 	@Column(length = 30, nullable = false)
 	private String name;
 
+	@NotBlank(message = "lastname cannot be null")
 	@Column(length = 40, nullable = false)
 	private String lastName;
 	
+	@NotBlank(message = "Document cannot be null")
 	@Enumerated(value = EnumType.STRING)
 	private DocumentTipe DocumentTipe;
 	
 	@Column(unique = true, nullable = false)
 	private Long document;
 	
+	@NotBlank(message = "Email cannot be null")
+	@Email(message = "Email should be valid")
 	@Column(nullable = false)
 	private String email;
 
