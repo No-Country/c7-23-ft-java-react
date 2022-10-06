@@ -15,9 +15,11 @@ export default function Hero() {
           </p>
           <div className="my-5">
             <button className="btn btn-primary rounded-xl mr-5">
-              About us
+              <a href="#about">About us</a>
             </button>
-            <button className="btn btn-primary rounded-xl">Contact</button>
+            <button className="btn btn-primary rounded-xl">
+              <a href="#contact">Contact</a>
+            </button>
           </div>
           <div className="flex w-full h-12 relative">
             <input
