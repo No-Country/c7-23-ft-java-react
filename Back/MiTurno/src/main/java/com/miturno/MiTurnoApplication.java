@@ -1,13 +1,13 @@
-package com.nocountryc723.HomeBanking;
+package com.miturno;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HomeBankingApplication {
+public class MiTurnoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HomeBankingApplication.class, args);
+		SpringApplication.run(MiTurnoApplication.class, args);
 	}
 
 }

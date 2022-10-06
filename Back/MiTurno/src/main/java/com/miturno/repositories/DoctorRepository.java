@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.nocountryc723.HomeBanking.Repositories;
+package com.miturno.repositories;
 
-import com.nocountryc723.HomeBanking.Models.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+
+import com.miturno.models.Doctor;
 
 /**
  *
