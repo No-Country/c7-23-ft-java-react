@@ -54,4 +54,10 @@ public class UserController {
         user.setId(id);
         userServ.updateUser(user);
     }
+    
+//    @PostMapping("/auth/login")
+//    public void loginUser(@RequestBody User user) throws InvalidUserException{
+//        userServ.saveUser(user);
+//        //falta implementación para añadir rol a usuario
+//    }
 }
