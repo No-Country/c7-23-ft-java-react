@@ -2,7 +2,7 @@ export default function SearchInput() {
   return (
     <div className="flex w-full  h-20 items-center">
       <div
-        className="flex w-60
+        className="flex w-full md:w-60
        h-12 relative"
       >
         <input

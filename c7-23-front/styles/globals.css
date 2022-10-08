@@ -8,6 +8,11 @@
     scroll-behavior: smooth;
   }
 }
+@layer utilities {
+  .th-static {
+    position: static !important;
+  }
+}
 
 @layer components {
   .form-input {
