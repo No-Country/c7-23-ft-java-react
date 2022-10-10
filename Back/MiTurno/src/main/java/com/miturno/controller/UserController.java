@@ -55,5 +55,10 @@ public class UserController {
         user.setId(id);
         userServ.updateUser(user);
     }
-    
+
+    @GetMapping("/auth/login")
+    @ResponseBody
+    public User login(@RequestBody User user) throws InvalidUserException, NotFoundException {
+        return userServ.validationUser(user);
+    }
 }

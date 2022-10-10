@@ -4,6 +4,8 @@ import com.miturno.exceptions.InvalidUserException;
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.User;
 import java.util.List;
+
+import com.sun.corba.se.impl.protocol.RequestCanceledException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,5 +25,6 @@ public interface UserService {
     public void deleteUser(Long id) throws NotFoundException;
     
     public void updateUser(User user) throws InvalidUserException;
-    
+
+    public User validationUser(User user) throws InvalidUserException, NotFoundException, RequestCanceledException;
 }
