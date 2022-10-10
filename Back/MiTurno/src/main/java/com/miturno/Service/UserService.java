@@ -26,5 +26,11 @@ public interface UserService {
     
     public void updateUser(User user) throws InvalidUserException;
 
+    public void registerUser(User user) throws InvalidUserException;
+
     public User validationUser(User user) throws InvalidUserException, NotFoundException, RequestCanceledException;
+
+    public void validationDocument (User user) throws InvalidUserException;
+
+    public void validationMail(User user) throws InvalidUserException;
 }

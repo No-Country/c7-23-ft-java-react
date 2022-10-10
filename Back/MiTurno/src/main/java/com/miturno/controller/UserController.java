@@ -41,7 +41,7 @@ public class UserController {
     
     @PostMapping("/auth/register")
     public void registerUser(@Valid @RequestBody User user) throws InvalidUserException{
-        userServ.saveUser(user);
+        userServ.registerUser(user);
         //falta implementación para añadir rol a usuario
     }
     
