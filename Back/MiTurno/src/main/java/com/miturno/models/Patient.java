@@ -1,7 +1,7 @@
-
 package com.miturno.models;
 
 import com.miturno.models.enums.DocumentTipe;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,13 +21,13 @@ import org.hibernate.annotations.Where;
  *
  * @author Leonardo Terlizzi
  */
+
 @Entity
 @Data
 @Table(name = "patients")
 @SQLDelete(sql = "UPDATE patients SET deleted = true WHERE id=?")
 @Where(clause= "deleted=false")
-
-public class Patient {
+public class Patient implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,7 +59,9 @@ public class Patient {
     
     @Column(columnDefinition= "TEXT", length=5000)
     private String clinic_history;
-    //private Turn turn; //not implemented yet
+    
+    //private Turn turn; 
+    //not implemented yet
     
     @CreationTimestamp
     @Column(updatable = false)

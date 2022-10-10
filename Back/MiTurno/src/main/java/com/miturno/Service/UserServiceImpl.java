@@ -1,4 +1,3 @@
-
 package com.miturno.Service;
 
 import com.miturno.exceptions.InvalidUserException;
@@ -7,12 +6,14 @@ import com.miturno.models.User;
 import com.miturno.repositories.UserRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Leonardo Terlizzi
  */
+
+@Service
 public class UserServiceImpl implements UserService{
     
     @Autowired
@@ -42,6 +43,5 @@ public class UserServiceImpl implements UserService{
     public void updateUser(User user) throws InvalidUserException{
         userRepo.save(user);
     }
-    
-    
+      
 }
