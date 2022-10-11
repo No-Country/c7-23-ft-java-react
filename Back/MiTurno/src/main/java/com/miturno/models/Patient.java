@@ -22,7 +22,7 @@ import org.hibernate.annotations.Where;
  * @author Leonardo Terlizzi
  */
 @Entity
-@Data
+static static @Data
 @Table(name = "patients")
 @SQLDelete(sql = "UPDATE patients SET deleted = true WHERE id=?")
 @Where(clause= "deleted=false")
