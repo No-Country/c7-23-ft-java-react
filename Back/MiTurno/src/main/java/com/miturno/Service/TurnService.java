@@ -1,0 +1,24 @@
+
+package com.miturno.Service;
+
+import com.miturno.exceptions.InvalidTurnException;
+import com.miturno.exceptions.NotFoundException;
+import com.miturno.models.Turn;
+import java.util.List;
+
+/**
+ *
+ * @author Leonardo Terlizzi
+ */
+public interface TurnService {
+    
+    public List<Turn> getTurns() throws NotFoundException;
+    
+    public Turn getTurn(String document) throws NotFoundException;
+    
+    public void saveTurn(Turn turn) throws InvalidTurnException;
+    
+    public void deleteTurn(Long id) throws NotFoundException;
+    
+    public void updateTurn(Turn turn) throws InvalidTurnException;
+}
