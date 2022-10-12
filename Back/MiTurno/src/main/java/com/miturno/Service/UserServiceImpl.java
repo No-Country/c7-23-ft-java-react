@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -43,7 +44,15 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void updateUser(User user) throws InvalidUserException{
+    public void updateUser(User user, @RequestParam Long id) throws InvalidUserException{
+        validationDocument(user);
+        validationMail(user);
+
+        user.setId(id);
+
+        if(!user.getPassword().equals(userRepo.findById(id).get().getPassword())){
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        }
         userRepo.save(user);
 
     }

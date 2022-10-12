@@ -49,11 +49,10 @@ public class UserController {
     public void deleteUser(@RequestParam Long id) throws NotFoundException {
         userServ.deleteUser(id);
     }
-    
+
     @PatchMapping("/user/update")
     public void updateUser(@RequestBody User user, @RequestParam Long id) throws InvalidUserException{
-        user.setId(id);
-        userServ.updateUser(user);
+                userServ.updateUser(user, id);
     }
 
     @PostMapping("/auth/login")

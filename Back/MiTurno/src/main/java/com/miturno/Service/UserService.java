@@ -24,7 +24,7 @@ public interface UserService {
     
     public void deleteUser(Long id) throws NotFoundException;
     
-    public void updateUser(User user) throws InvalidUserException;
+    public void updateUser(User user, Long id) throws InvalidUserException;
 
     public void registerUser(User user) throws InvalidUserException;
 
