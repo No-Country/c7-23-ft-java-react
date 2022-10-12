@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
@@ -38,13 +39,17 @@ public class Turn {
     @Column(nullable=false)
     private LocalTime hora;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_id", referencedColumnName = "id")
     private Patient patient;
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor doctor;
+    
+    private Boolean avaible;
+    
+    private Boolean locked;
 
     public Turn(Long id, LocalDate day, LocalTime hora, Patient patient, Doctor doctor) {
         this.id = id;
@@ -54,6 +59,7 @@ public class Turn {
         this.doctor = doctor;
     }
     
+   
     
     
     
