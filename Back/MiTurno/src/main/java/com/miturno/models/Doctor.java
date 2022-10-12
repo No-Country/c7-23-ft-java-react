@@ -1,6 +1,7 @@
 package com.miturno.models;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -43,11 +44,11 @@ public class Doctor extends User  {
 	@Column(nullable = false)
 	private java.time.LocalTime end_time;
 
-	@Column(nullable = false)
-	private List<Integer> atentionDays; // 0 lunes 1 martes 2 miercoles 3 jueves 4 viernes 5 sabado
+	//@Column(nullable = false)
+	//private List<Integer> atentionDays; // 0 lunes 1 martes 2 miercoles 3 jueves 4 viernes 5 sabado
         
-        @Column(nullable = false)
-        private List<Integer> atentionTurn; // 0 mañana 1 tarde
+        //@Column(nullable = false)
+        //private List<Integer> atentionTurn; // 0 mañana 1 tarde
         
         @OneToMany(fetch = FetchType.LAZY)
         private List<Turn> turnos;
