@@ -4,11 +4,9 @@ package com.miturno.models;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
@@ -24,7 +22,7 @@ import org.hibernate.annotations.Where;
 @Table(name = "specialties")
 @SQLDelete(sql = "UPDATE specialties SET deleted = true WHERE id=?")
 @Where(clause= "deleted=false")
-public class Specialty implements Serializable {
+public class Speciality implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

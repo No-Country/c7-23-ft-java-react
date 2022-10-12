@@ -32,9 +32,9 @@ import lombok.Setter;
 @Table(name = "Doctors")
 public class Doctor extends User implements Serializable {
 
-//  @Id
-//  @GeneratedValue(strategy = GenerationType.IDENTITY)
-//  private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
     @Basic
     //@Column(nullable = false)
