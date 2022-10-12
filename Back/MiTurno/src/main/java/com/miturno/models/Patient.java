@@ -64,8 +64,7 @@ public class Patient implements Serializable {
     @Column(columnDefinition= "TEXT", length=5000)
     private String clinic_history;
     
-    //private Turn turn; 
-    //not implemented yet
+
     
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "turn_id", referencedColumnName = "id")
