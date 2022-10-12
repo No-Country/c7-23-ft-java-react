@@ -7,5 +7,6 @@ import com.miturno.models.User;
 
 @Repository
 public interface UserRepository extends  JpaRepository<User, Long>{
-
+            User findByDocument(Long document);
+            User findByEmail(String email);
 }
