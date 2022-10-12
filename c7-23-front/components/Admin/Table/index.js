@@ -1,4 +1,5 @@
 import { flexRender } from "@tanstack/react-table";
+import DropDown from "../../DropDown";
 
 export default function Table({ table }) {
   return (
@@ -31,6 +32,9 @@ export default function Table({ table }) {
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
+              <td className="rounded-r-lg">
+                <DropDown options={["Edit", "Delete"]} />
+              </td>
             </tr>
           ))}
         </tbody>
@@ -47,6 +51,7 @@ export default function Table({ table }) {
                       )}
                 </th>
               ))}
+              <th className="rounded-r-lg"></th>
             </tr>
           ))}
         </tfoot>
