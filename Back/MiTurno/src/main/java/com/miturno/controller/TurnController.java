@@ -34,8 +34,8 @@ public class TurnController {
     
     @GetMapping("/turn/find")
     @ResponseBody
-    public Turn getTurn(@RequestParam String document) throws NotFoundException {
-        return turnServ.getTurn(document);
+    public Turn getTurn(@RequestParam Long id) throws NotFoundException {
+        return turnServ.getTurn(id);
     }
     
     @PostMapping("/turn/new")

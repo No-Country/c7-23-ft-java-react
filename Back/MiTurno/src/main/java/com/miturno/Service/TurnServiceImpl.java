@@ -25,8 +25,8 @@ public class TurnServiceImpl implements TurnService{
     }
 
     @Override
-    public Turn getTurn(String document) throws NotFoundException {
-        return turnRepo.findByDocument(document);
+    public Turn getTurn(Long id) throws NotFoundException {
+        return turnRepo.findById(id).orElse(null);
     }
 
     @Override

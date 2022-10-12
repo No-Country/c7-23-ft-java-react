@@ -14,7 +14,7 @@ public interface TurnService {
     
     public List<Turn> getTurns() throws NotFoundException;
     
-    public Turn getTurn(String document) throws NotFoundException;
+    public Turn getTurn(Long id) throws NotFoundException;
     
     public void saveTurn(Turn turn) throws InvalidTurnException;
     
