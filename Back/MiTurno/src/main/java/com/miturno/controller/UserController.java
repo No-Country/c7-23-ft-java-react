@@ -1,4 +1,3 @@
-
 package com.miturno.controller;
 
 import com.miturno.Service.UserService;
@@ -6,6 +5,7 @@ import com.miturno.exceptions.InvalidUserException;
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.User;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author Leonardo Terlizzi
  */
+
 @RestController
 public class UserController {
     
@@ -39,8 +40,8 @@ public class UserController {
     }
     
     @PostMapping("/auth/register")
-    public void registerUser(@RequestBody User user) throws InvalidUserException{
-        userServ.saveUser(user);
+    public void registerUser(@Valid @RequestBody User user) throws InvalidUserException{
+        userServ.registerUser(user);
         //falta implementación para añadir rol a usuario
     }
     
@@ -54,10 +55,10 @@ public class UserController {
         user.setId(id);
         userServ.updateUser(user);
     }
-    
-//    @PostMapping("/auth/login")
-//    public void loginUser(@RequestBody User user) throws InvalidUserException{
-//        userServ.saveUser(user);
-//        //falta implementación para añadir rol a usuario
-//    }
+
+    @PostMapping("/auth/login")
+    @ResponseBody
+    public User login(@RequestBody User user) throws InvalidUserException, NotFoundException {
+        return userServ.validationUser(user);
+    }
 }

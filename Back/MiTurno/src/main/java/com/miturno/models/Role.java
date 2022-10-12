@@ -19,6 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.miturno.models.enums.RoleEnum;
+import java.io.Serializable;
 
 import lombok.Data;
 
@@ -28,7 +29,7 @@ import lombok.Data;
  */
 @Entity
 @Data
-public class Role {
+public class Role implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +37,7 @@ public class Role {
     
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
-    private RoleEnum role;
+    private RoleEnum roleName;
     
     @Column(nullable = false)
     private String description;
@@ -47,4 +48,5 @@ public class Role {
 
     @UpdateTimestamp
     private Timestamp updateAt;
+    
 }

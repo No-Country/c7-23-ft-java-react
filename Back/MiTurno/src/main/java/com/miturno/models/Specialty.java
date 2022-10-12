@@ -1,6 +1,7 @@
 
 package com.miturno.models;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,7 +24,7 @@ import org.hibernate.annotations.Where;
 @Table(name = "specialties")
 @SQLDelete(sql = "UPDATE specialties SET deleted = true WHERE id=?")
 @Where(clause= "deleted=false")
-public class Specialty {
+public class Specialty implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
