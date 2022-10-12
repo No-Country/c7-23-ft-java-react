@@ -6,6 +6,8 @@ import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.User;
 import java.util.List;
 import javax.validation.Valid;
+
+import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +53,7 @@ public class UserController {
     }
 
     @PatchMapping("/user/update")
-    public void updateUser(@RequestBody User user, @RequestParam Long id) throws InvalidUserException{
+    public void updateUser(@Valid @RequestBody User user, @RequestParam Long id) throws InvalidUserException {
                 userServ.updateUser(user, id);
     }
 
