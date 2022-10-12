@@ -49,7 +49,7 @@ public class PatientController {
     
     @PatchMapping("/patient/update")
     public void updateDoctor(@RequestBody Patient patient, @RequestParam Long id) throws InvalidPatientException{
-        //Patient.setId(id); TIRA ERROR
+        patient.setId(id);
         PatServ.updatePatient(patient);
     }
 }
