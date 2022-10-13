@@ -1,9 +1,9 @@
-import { useMemo } from "react";
+import { useState, useMemo } from "react";
 import Image from "next/image";
+import SearchInput from "../../../components/SeachInput";
 
 import Table from "../../../components/Admin/Table";
 import Layout from "../../../components/Admin/Layout";
-import SearchInput from "../../../components/SeachInput";
 
 import getUserData from "../../../api/getUserData";
 import useGetUserData from "../../../queries";
@@ -24,6 +24,8 @@ export async function getServerSideProps() {
 
 export default function Appointments(initialData) {
   const { data } = useGetUserData(initialData);
+  const [columnFilters, setColumnFilters] = useState("");
+  const [globalFilter, setGlobalFilter] = useState("");
 
   const columns = useMemo(
     () => [
@@ -57,9 +59,6 @@ export default function Appointments(initialData) {
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-
-  // table.getAllColumns()[0].setFilterValue()
-
   return (
     <Layout>
       <div className="flex justify-center md:justify-between">
@@ -84,7 +83,6 @@ export default function Appointments(initialData) {
           Pending Appoiments
         </button>
       </div>
-      <SearchInput />
       <div>
         <Table table={table} />
       </div>

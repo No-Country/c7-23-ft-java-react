@@ -7,7 +7,6 @@ export default function SearchInput() {
       >
         <input
           type="text"
-          placeholder="Search appoiment"
           className="form-input shadow-md h-full border-none"
         />
         <button className="rounded-r-xl h-full absolute right-2">

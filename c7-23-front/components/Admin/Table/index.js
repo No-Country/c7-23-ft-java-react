@@ -1,9 +1,11 @@
 import { flexRender } from "@tanstack/react-table";
 import DropDown from "../../DropDown";
+import SearchInput from "../../SeachInput/index";
 
 export default function Table({ table }) {
   return (
     <div className="overflow-x-auto">
+      <SearchInput />
       <table className="table w-full rounded-lg  border-spacing-y-4 border-separate">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
