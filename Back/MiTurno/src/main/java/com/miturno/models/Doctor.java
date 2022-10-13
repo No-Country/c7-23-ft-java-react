@@ -48,7 +48,7 @@ public class Doctor extends User  {
 //	private java.time.LocalTime end_time;
 
 	//@Column(nullable = false)
-        @ElementCollection(targetClass=Integer.class)
+        @ElementCollection(targetClass=DayOfWeek.class)
 	private List<DayOfWeek> atentionDays = new ArrayList<>(); // 0 lunes 1 martes 2 miercoles 3 jueves 4 viernes 5 sabado
         
         //@Column(nullable = false)

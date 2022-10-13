@@ -16,6 +16,7 @@ import com.miturno.Service.DoctorService;
 import com.miturno.exceptions.InvalidDoctorException;
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.Doctor;
+import java.sql.Array;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 
