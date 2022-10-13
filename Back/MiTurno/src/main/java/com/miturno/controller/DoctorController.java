@@ -16,6 +16,8 @@ import com.miturno.Service.DoctorService;
 import com.miturno.exceptions.InvalidDoctorException;
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.Doctor;
+import java.time.DayOfWeek;
+import java.util.ArrayList;
 
 @RestController
 public class DoctorController {
@@ -36,7 +38,12 @@ public class DoctorController {
     }
 
     @PostMapping("/doctor/register")
-    public void registerDoctor(@RequestBody Doctor doctor) throws InvalidDoctorException{
+    public void registerDoctor(@RequestBody Doctor doctor, @RequestParam ArrayList<Integer> days) throws InvalidDoctorException{
+        ArrayList<DayOfWeek> dias = new ArrayList<>();
+        for(int i= 0; i < days.size(); i++) {
+           dias.add(DayOfWeek.of(days.get(i)));
+        }
+        doctor.setAtentionDays(dias);
         docServ.saveDoctor(doctor);
     }
     

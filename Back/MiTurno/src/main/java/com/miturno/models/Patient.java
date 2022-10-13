@@ -3,8 +3,10 @@ package com.miturno.models;
 import com.miturno.models.enums.DocumentTipe;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -68,7 +70,8 @@ public class Patient implements Serializable {
     
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "turn_id", referencedColumnName = "id")
-    private List<Turn> turnos;
+    @ElementCollection
+    private ArrayList<Turn> turnos;
     
     @CreationTimestamp
     @Column(updatable = false)
