@@ -37,7 +37,7 @@ public class UserController {
     
     @GetMapping("/user")
     @ResponseBody
-    public User getUser(Long id) throws NotFoundException{
+    public User getUser(@RequestParam Long id) throws NotFoundException{
         return userServ.getUser(id);
     }
     
