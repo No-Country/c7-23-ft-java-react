@@ -3,6 +3,7 @@ package com.miturno.models;
 import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -48,20 +49,20 @@ public class Doctor extends User  {
 
 	//@Column(nullable = false)
         @ElementCollection(targetClass=Integer.class)
-	private ArrayList<DayOfWeek> atentionDays; // 0 lunes 1 martes 2 miercoles 3 jueves 4 viernes 5 sabado
+	private List<DayOfWeek> atentionDays = new ArrayList<>(); // 0 lunes 1 martes 2 miercoles 3 jueves 4 viernes 5 sabado
         
         //@Column(nullable = false)
         @ElementCollection(targetClass=Integer.class)
-        private ArrayList<Integer> atentionTurn; // 1 mañana (8 a 13), 2 tarde (14 a 20)
+        private List<Integer> atentionTurn = new ArrayList<>(); // 1 mañana (8 a 13), 2 tarde (14 a 20)
         
         @OneToMany(fetch = FetchType.LAZY)
-        private ArrayList<Turn> turnos;
+        private List<Turn> turnos;
 
 	private Boolean available;
 	
 
 	@OneToMany(fetch = FetchType.LAZY)
-	private ArrayList<Speciality> specialties;
+	private List<Speciality> specialties = new ArrayList<>();
 	
 	@CreationTimestamp
         @Column(nullable = false, updatable = false)

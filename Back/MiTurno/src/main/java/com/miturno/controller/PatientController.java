@@ -38,7 +38,7 @@ public class PatientController {
         return patServ.getPatient(id);
     }
     
-    @GetMapping("/patient")
+    @GetMapping("/patientByDocument")
     @ResponseBody
     public Patient getPatientByDocument(@RequestParam Long document) throws NotFoundException {
         return patServ.getPatientByDocument(document);

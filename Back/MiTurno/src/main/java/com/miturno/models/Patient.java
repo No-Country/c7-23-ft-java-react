@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -71,7 +72,7 @@ public class Patient implements Serializable {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "turn_id", referencedColumnName = "id")
     @ElementCollection
-    private ArrayList<Turn> turnos;
+    private List<Turn> turnos = new ArrayList<>();
     
     @CreationTimestamp
     @Column(updatable = false)
