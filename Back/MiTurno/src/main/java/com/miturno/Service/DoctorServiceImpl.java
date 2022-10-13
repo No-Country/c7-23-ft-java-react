@@ -7,38 +7,40 @@ import org.springframework.stereotype.Service;
 import com.miturno.exceptions.InvalidDoctorException;
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.Doctor;
+import com.miturno.repositories.DoctorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class DoctorServiceImpl implements DoctorService{
+    
+    @Autowired
+    private DoctorRepository docRepo;
 
     @Override
     public List<Doctor> getDoctors() throws NotFoundException {
-        // TODO Auto-generated method stub
-        return null;
+        return docRepo.findAll();
     }
 
     @Override
     public Doctor getDoctor(Long id) throws NotFoundException {
-        // TODO Auto-generated method stub
-        return null;
+        return docRepo.findById(id).orElse(null);
     }
 
     @Override
     public void saveDoctor(Doctor doctor) throws InvalidDoctorException {
-        // TODO Auto-generated method stub
-        
+        docRepo.save(doctor);
     }
 
     @Override
     public void deleteDoctor(Long id) throws NotFoundException {
-        // TODO Auto-generated method stub
+        docRepo.deleteById(id);
         
     }
 
     @Override
     public void updateDoctor(Doctor doctor) throws InvalidDoctorException {
-        // TODO Auto-generated method stub
-        
+        docRepo.save(doctor);
     }
 
     

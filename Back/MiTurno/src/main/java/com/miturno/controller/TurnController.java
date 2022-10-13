@@ -1,9 +1,12 @@
 
 package com.miturno.controller;
 
+import com.miturno.Service.DoctorService;
 import com.miturno.Service.TurnService;
+import com.miturno.exceptions.InvalidDoctorException;
 import com.miturno.exceptions.InvalidTurnException;
 import com.miturno.exceptions.NotFoundException;
+import com.miturno.models.Doctor;
 import com.miturno.models.Turn;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,9 @@ public class TurnController {
     @Autowired
     private TurnService turnServ;
     
+    @Autowired
+    private DoctorService docServ;
+    
     @GetMapping("/turns")
     @ResponseBody
     public List<Turn> getTurns() throws NotFoundException {
@@ -42,6 +48,12 @@ public class TurnController {
     public void saveTurn(@RequestBody Turn turn) throws InvalidTurnException {
         turnServ.saveTurn(turn);
     }
+  
+    @PostMapping("/calendar")
+    public void saveCalendar(@RequestParam Long id, @RequestParam int year, @RequestParam int month) throws NotFoundException, InvalidDoctorException{
+        Doctor doc = docServ.getDoctor(id);
+        turnServ.flushTurns(doc, month, year);
+    }
     
     @DeleteMapping("/turn/delete")
     public void deleteTurn(@RequestParam Long id) throws NotFoundException {
@@ -52,6 +64,12 @@ public class TurnController {
     public void updateTurn(@RequestBody Turn turn, @RequestParam Long id) throws InvalidTurnException{
         turn.setId(id);
         turnServ.updateTurn(turn);
+    }
+    
+    @PatchMapping("/turn/lock")
+    public void lockTurn(@RequestParam Long id) throws NotFoundException, InvalidTurnException {
+        Turn turn = turnServ.getTurn(id);
+        turnServ.lockTurn(turn);
     }
     
 }

@@ -51,13 +51,7 @@ public class Turn {
     
     private Boolean locked;
 
-    public Turn(Long id, LocalDate day, LocalTime hora, Patient patient, Doctor doctor) {
-        this.id = id;
-        this.day = day;
-        this.hora = hora;
-        this.patient = patient;
-        this.doctor = doctor;
-    }
+ 
     
    
     
