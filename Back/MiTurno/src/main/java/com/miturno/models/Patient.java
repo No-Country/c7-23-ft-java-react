@@ -3,13 +3,17 @@ package com.miturno.models;
 import com.miturno.models.enums.DocumentTipe;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -60,8 +64,11 @@ public class Patient implements Serializable {
     @Column(columnDefinition= "TEXT", length=5000)
     private String clinic_history;
     
-    //private Turn turn; 
-    //not implemented yet
+
+    
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "turn_id", referencedColumnName = "id")
+    private List<Turn> turnos;
     
     @CreationTimestamp
     @Column(updatable = false)
