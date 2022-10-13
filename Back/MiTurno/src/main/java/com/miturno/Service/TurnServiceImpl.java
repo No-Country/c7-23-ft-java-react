@@ -76,7 +76,7 @@ public class TurnServiceImpl implements TurnService{
             lastDay = LocalDate.of(year, month+1, 1);
         }
         else {
-            lastDay = LocalDate.of(year+1, month, 1);
+            lastDay = LocalDate.of(year+1, 1, 1);
         }
         List<DayOfWeek> dias = doctor.getAtentionDays();
         ArrayList<LocalDate> diasLaborablesDelMes = new ArrayList<>();
