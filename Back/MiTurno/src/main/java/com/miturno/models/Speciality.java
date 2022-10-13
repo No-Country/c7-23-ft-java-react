@@ -20,8 +20,8 @@ import org.hibernate.annotations.Where;
 @Entity
 @Data
 @Table(name = "specialties")
-@SQLDelete(sql = "UPDATE specialties SET deleted = true WHERE id=?")
-@Where(clause= "deleted=false")
+//@SQLDelete(sql = "UPDATE specialties SET deleted = true WHERE id=?")
+//@Where(clause= "deleted=false")
 public class Speciality implements Serializable {
     
     @Id

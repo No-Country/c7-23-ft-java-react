@@ -32,8 +32,8 @@ import org.hibernate.annotations.Where;
 @Entity
 @Data
 @Table(name = "patients")
-@SQLDelete(sql = "UPDATE patients SET deleted = true WHERE id=?")
-@Where(clause= "deleted=false")
+//@SQLDelete(sql = "UPDATE patients SET deleted = true WHERE id=?")
+//@Where(clause= "deleted=false")
 public class Patient implements Serializable {
     
     @Id

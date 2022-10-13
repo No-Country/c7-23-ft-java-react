@@ -17,8 +17,8 @@ import java.sql.Timestamp;
 @Entity
 @Data
 @Table(name = "users")
-@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id=?")
-@Where(clause = "deleted=false")
+//@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id=?")
+//@Where(clause = "deleted=false")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User implements Serializable {
 
