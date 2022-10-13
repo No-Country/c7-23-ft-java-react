@@ -23,24 +23,24 @@ public class SpecialtiyController {
     @Autowired
     private SpecialityService SpeServ;
 
-    @GetMapping("/specialties")
+    @GetMapping("/specialities")
     @ResponseBody
     public List<Speciality> getSpecialtys() throws NotFoundException{
         return SpeServ.getSpecialtys();        
     }
 
-    @GetMapping("/specialty")
+    @GetMapping("/speciality")
     @ResponseBody
     public Speciality getSpecialty(Long id) throws NotFoundException{
         return SpeServ.getSpecialty(id);
     }
 
-    @PostMapping("/specialty/register")
+    @PostMapping("/speciality/register")
     public void registerSpecialty(@RequestBody Speciality speciality) throws InvalidSpecialityException {
         SpeServ.saveSpecialty(speciality);
     }
     
-    @DeleteMapping("/specialty/delete")
+    @DeleteMapping("/speciality/delete")
     public void deleteSpecialty(@RequestParam Long id) throws NotFoundException{
         SpeServ.deleteSpecialty(id);
     }
