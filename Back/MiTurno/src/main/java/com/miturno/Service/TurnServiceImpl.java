@@ -84,7 +84,7 @@ public class TurnServiceImpl implements TurnService{
         //agrega dias al array diasLaborablesDelMes segun los dias que trabaje el médico
         for(LocalDate firstDay = LocalDate.of(year, month, 1); firstDay.isBefore(lastDay); firstDay = firstDay.plusDays(1)){
             if(dias.contains(firstDay.getDayOfWeek())) {
-                diasLaborablesDelMes.add(lastDay);
+                diasLaborablesDelMes.add(firstDay);
             }
         }
         
