@@ -38,7 +38,7 @@ public class User implements Serializable {
 
     @NotNull(message = "DocumentType cannot be null")
     @Enumerated(value = EnumType.STRING)
-    private DocumentTipe DocumentTipe;
+    private DocumentTipe DocumentType;
 
     @NotNull(message = "Document cannot be null")
 //  @Column(unique = true, nullable = false)

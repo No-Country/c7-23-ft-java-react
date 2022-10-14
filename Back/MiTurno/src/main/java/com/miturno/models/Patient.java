@@ -56,7 +56,7 @@ public class Patient implements Serializable {
     private String phone;
     
     @Column(length= 50, nullable=false)
-    private String mail;
+    private String email;
     
     @Column(nullable=false)
     private boolean particular;

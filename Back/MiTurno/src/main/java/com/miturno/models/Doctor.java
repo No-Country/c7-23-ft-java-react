@@ -49,14 +49,14 @@ public class Doctor extends User  {
 
 	//@Column(nullable = false)
         @ElementCollection(targetClass=DayOfWeek.class)
-	private List<DayOfWeek> atentionDays = new ArrayList<>(); // 0 lunes 1 martes 2 miercoles 3 jueves 4 viernes 5 sabado
+	private List<DayOfWeek> attentionDays = new ArrayList<>(); // 0 lunes 1 martes 2 miercoles 3 jueves 4 viernes 5 sabado
         
         //@Column(nullable = false)
         @ElementCollection(targetClass=Integer.class)
-        private List<Integer> atentionTurn = new ArrayList<>(); // 1 mañana (8 a 13), 2 tarde (14 a 20)
+        private List<Integer> attentionTurn = new ArrayList<>(); // 1 mañana (8 a 13), 2 tarde (14 a 20)
         
         @OneToMany(fetch = FetchType.LAZY)
-        private List<Turn> turnos;
+        private List<Turn> turns;
 
 	private Boolean available;
 	
