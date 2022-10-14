@@ -2,10 +2,12 @@ package com.miturno.models.dto;
 
 import com.miturno.models.Speciality;
 import com.miturno.models.Turn;
+import lombok.Data;
 
 import java.time.DayOfWeek;
 import java.util.List;
 
+@Data
 public class DoctorResponse {
 
     private String rol;
