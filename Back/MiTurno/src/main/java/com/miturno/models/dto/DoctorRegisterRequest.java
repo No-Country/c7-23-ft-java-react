@@ -8,7 +8,7 @@ import java.time.DayOfWeek;
 import java.util.List;
 
 @Data
-public class RegisterDoctorRequest {
+public class DoctorRegisterRequest {
 
     private String name;
     private String lastName;
