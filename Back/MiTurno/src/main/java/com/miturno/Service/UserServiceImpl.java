@@ -4,6 +4,8 @@ import com.miturno.exceptions.InvalidUserException;
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.User;
 import com.miturno.repositories.UserRepository;
+import com.miturno.util.Encrypter;
+import com.miturno.util.Validation;
 import com.sun.corba.se.impl.protocol.RequestCanceledException;
 import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,11 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private Encrypter encrypter;
+
+    @Autowired
+    Validation validation;
 
     @Override
     public List<User> getUsers() throws NotFoundException {
@@ -61,17 +68,15 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void registerUser(User user) throws InvalidUserException {
-        validationDocument(user);
-        validationMail(user);
 
-        User newUser = new User();
+        validation.validationDocument(user.getDocument());
+        validation.validationEmail(user.getEmail());
 
-        newUser = user;
-        newUser.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        saveUser(newUser);
+        user.setPassword(encrypter.EncrypterPassword(user.getPassword()));
+        saveUser(user);
     }
 
-    @Override
+   @Override
     public User validationUser(User user) throws InvalidUserException, NotFoundException, RequestCanceledException {
         Optional<User> response = Optional.ofNullable(userRepo.findByDocument(user.getDocument()));
         if (response.isPresent()) {
@@ -85,21 +90,10 @@ public class UserServiceImpl implements UserService{
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Document no exist");
     }
 
-    @Override
-    public void validationDocument(User user) throws InvalidUserException {
-        Optional<User> response = Optional.ofNullable(userRepo.findByDocument(user.getDocument()));
-        if (response.isPresent()){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The document already exist");
-        }
-    }
 
-    @Override
-    public void validationMail(User user) throws InvalidUserException {
-        Optional<User> response = Optional.ofNullable(userRepo.findByEmail(user.getEmail()));
-        if (response.isPresent()){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The email already exist");
-        }
-    }
+
+
+
 
 
 }

@@ -2,6 +2,7 @@ package com.miturno.controller;
 
 import java.util.List;
 
+import com.miturno.exceptions.InvalidUserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,13 +40,8 @@ public class DoctorController {
     }
 
     @PostMapping("/doctor/register")
-    public void registerDoctor(@RequestBody Doctor doctor, @RequestParam ArrayList<Integer> days) throws InvalidDoctorException{
-        ArrayList<DayOfWeek> dias = new ArrayList<>();
-        for(int i= 0; i < days.size(); i++) {
-           dias.add(DayOfWeek.of(days.get(i)));
-        }
-        doctor.setAtentionDays(dias);
-        docServ.saveDoctor(doctor);
+    public void registerDoctor(@RequestBody Doctor doctor, @RequestParam ArrayList<Integer> days) throws InvalidDoctorException, InvalidUserException {
+        docServ.registerDoctor(doctor, days);
     }
     
     @DeleteMapping("/doctor/delete")

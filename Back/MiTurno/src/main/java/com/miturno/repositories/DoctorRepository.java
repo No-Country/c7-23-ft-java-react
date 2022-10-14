@@ -5,6 +5,7 @@
  */
 package com.miturno.repositories;
 
+import com.miturno.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +17,7 @@ import com.miturno.models.Doctor;
  */
 @Repository
 public interface DoctorRepository extends JpaRepository<Doctor, Long>{
-    
-    
+
+    Doctor findByDocument(Long document);
+    Doctor findByEmail(String email);
 }
