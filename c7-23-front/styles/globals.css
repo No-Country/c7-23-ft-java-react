@@ -16,6 +16,6 @@
 
 @layer components {
   .form-input {
-    @apply rounded-xl block mb-4 w-full;
+    @apply rounded-xl block mb-1 w-full;
   }
 }

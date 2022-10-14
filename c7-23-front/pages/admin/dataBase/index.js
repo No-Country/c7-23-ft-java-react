@@ -1,5 +1,8 @@
 import Layout from "../../../components/Admin/Layout";
+import withAuthPage from "../../../hocs/withAuthPage";
 
-export default function DataBase() {
+function DataBasePage() {
   return <Layout></Layout>;
 }
+
+export default withAuthPage(DataBasePage)

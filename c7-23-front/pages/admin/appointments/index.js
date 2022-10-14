@@ -1,9 +1,11 @@
-import { useState, useMemo } from "react";
+import { useMemo } from "react";
 import Image from "next/image";
-import SearchInput from "../../../components/SeachInput";
 
 import Table from "../../../components/Admin/Table";
 import Layout from "../../../components/Admin/Layout";
+import SearchInput from "../../../components/SeachInput";
+
+import withAuthPage from "../../../hocs/withAuthPage";
 
 import getUserData from "../../../api/getUserData";
 import useGetUserData from "../../../queries";
@@ -17,15 +19,8 @@ import AddIcon from "../../../public/assets/icons/addIcon.svg";
 
 const columnHelper = createColumnHelper();
 
-export async function getServerSideProps() {
-  const users = await getUserData();
-  return { props: { users } };
-}
-
-export default function Appointments(initialData) {
-  const { data } = useGetUserData(initialData);
-  const [columnFilters, setColumnFilters] = useState("");
-  const [globalFilter, setGlobalFilter] = useState("");
+function AppointmentsPage({ users }) {
+  const { data } = useGetUserData(users);
 
   const columns = useMemo(
     () => [
@@ -59,6 +54,9 @@ export default function Appointments(initialData) {
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+
+  // table.getAllColumns()[0].setFilterValue()
+
   return (
     <Layout>
       <div className="flex justify-center md:justify-between">
@@ -83,6 +81,7 @@ export default function Appointments(initialData) {
           Pending Appoiments
         </button>
       </div>
+      <SearchInput />
       <div>
         <Table table={table} />
       </div>
@@ -95,7 +94,7 @@ export default function Appointments(initialData) {
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">Add an appoiment</h3>
+          <h3 className="text-lg font-bold">Add an appointment</h3>
           <div className="mt-2">
             <label>
               Name
@@ -110,7 +109,7 @@ export default function Appointments(initialData) {
               />
             </label>
             <label>
-              N° Tikect
+              N° Ticket
               <input
                 type="number"
                 placeholder="ticket"
@@ -134,4 +133,11 @@ export default function Appointments(initialData) {
       </div>
     </Layout>
   );
+}
+
+export default withAuthPage(AppointmentsPage)
+
+export async function getServerSideProps() {
+  const users = await getUserData();
+  return { props: { users } };
 }
