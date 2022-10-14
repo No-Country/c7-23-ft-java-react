@@ -3,9 +3,9 @@ import Link from "next/link";
 
 import ArrowLeftIcon from "../../../public/assets/icons/arrowLeftIcon.svg";
 
-export default function Menu({ menuList, user }) {
+export default function MenuBody({ menuList, user }) {
   return (
-    <div className="h-auto min-h-screen w-64 bg-base-100 relative shadow-2xl">
+    <div>
       <div className="h-12 flex justify-center items-center">
         <p className="font-medium text-xl">My turn</p>
       </div>

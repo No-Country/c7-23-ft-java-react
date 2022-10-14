@@ -1,4 +1,5 @@
 import { flexRender } from "@tanstack/react-table";
+import DropDown from "../../DropDown";
 
 export default function Table({ table }) {
   return (
@@ -6,9 +7,9 @@ export default function Table({ table }) {
       <table className="table w-full rounded-lg  border-spacing-y-4 border-separate">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
+            <tr className="first:static" key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="bg-transparent">
+                <th key={header.id} className="bg-transparent th-static">
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -31,6 +32,9 @@ export default function Table({ table }) {
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
+              <td className="rounded-r-lg">
+                <DropDown options={["Edit", "Delete"]} />
+              </td>
             </tr>
           ))}
         </tbody>
@@ -38,7 +42,7 @@ export default function Table({ table }) {
           {table.getFooterGroups().map((footerGroup) => (
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <th className="th-static" key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -47,6 +51,7 @@ export default function Table({ table }) {
                       )}
                 </th>
               ))}
+              <th className="rounded-r-lg"></th>
             </tr>
           ))}
         </tfoot>

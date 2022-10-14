@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_USER = "https://reqres.in/api";
+// const API_USER = "https://reqres.in/api";
 
-export const instance = axios.create({
-  baseURL: API_USER,
+export const MyTurnAPI = axios.create({
+  baseURL: "https://grupo23miturnoapi.herokuapp.com",
 });

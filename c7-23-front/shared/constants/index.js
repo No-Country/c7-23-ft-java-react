@@ -4,8 +4,8 @@ export const MENULISTOFADMIN = [
     name: "Dashboard",
   },
   {
-    url: "/admin/appoiments",
-    name: "Appoiments",
+    url: "/admin/appointments",
+    name: "Appointments",
   },
   {
     url: "/admin/dataBase",
