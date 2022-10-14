@@ -18,7 +18,7 @@ import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.Speciality;
 
 @RestController
-public class SpecialtiyController {
+public class SpecialityController {
     
     @Autowired
     private SpecialityService SpeServ;
@@ -47,7 +47,7 @@ public class SpecialtiyController {
     
     @PatchMapping("/speciality/update")
     public void updateSpecialty(@RequestBody Speciality speciality, @RequestParam Long id) throws InvalidSpecialityException {
-        speciality.setId(id); //TIRA ERROR
+        speciality.setId(id);
         SpeServ.updatePatient(speciality);
     }
 
