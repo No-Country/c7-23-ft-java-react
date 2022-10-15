@@ -71,7 +71,7 @@ public class DoctorServiceImpl implements DoctorService{
         for(int i= 0; i < days.size(); i++) {
             dias.add(DayOfWeek.of(days.get(i)));
         }
-        doctor.setAtentionDays(dias);
+        doctor.setAttentionDays(dias);
         doctor.setPassword(encrypter.EncrypterPassword(doctor.getPassword()));
         saveDoctor(doctor);
     }

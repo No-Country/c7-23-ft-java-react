@@ -12,5 +12,4 @@ public class UserResponse {
     private String DocumentType;
     private Long document;
     private String email;
-
 }
