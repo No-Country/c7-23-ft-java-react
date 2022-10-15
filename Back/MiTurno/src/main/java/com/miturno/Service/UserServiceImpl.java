@@ -2,12 +2,14 @@ package com.miturno.Service;
 
 import com.miturno.exceptions.InvalidUserException;
 import com.miturno.exceptions.NotFoundException;
+import com.miturno.mapper.UserResponseMapper;
 import com.miturno.models.User;
+import com.miturno.models.dto.LoginRequest;
+import com.miturno.models.dto.UserResponse;
 import com.miturno.repositories.UserRepository;
 import com.miturno.util.Encrypter;
 import com.miturno.util.Validation;
 import com.sun.corba.se.impl.protocol.RequestCanceledException;
-import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +30,8 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepo;
     @Autowired
     private Encrypter encrypter;
+    @Autowired
+    private UserResponseMapper mapper;
 
     @Autowired
     Validation validation;
@@ -77,12 +81,12 @@ public class UserServiceImpl implements UserService{
     }
 
    @Override
-    public User validationUser(User user) throws InvalidUserException, NotFoundException, RequestCanceledException {
-        Optional<User> response = Optional.ofNullable(userRepo.findByDocument(user.getDocument()));
+    public UserResponse validationUser(LoginRequest user) throws InvalidUserException, NotFoundException, RequestCanceledException {
+        Optional<User> response = Optional.ofNullable(userRepo.findByDocument(Long.valueOf(user.getDocument())));
         if (response.isPresent()) {
             User repoUser = response.get();
             if (new BCryptPasswordEncoder().matches(user.getPassword(), repoUser.getPassword())){
-                return repoUser;
+                return mapper.userToUserResponse(repoUser);
             } else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Incorrect password");
             }

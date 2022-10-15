@@ -1,6 +1,7 @@
 package com.miturno.models;
 
 import com.miturno.models.enums.DocumentType;
+import com.miturno.models.enums.RoleEnum;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -20,6 +21,7 @@ import java.sql.Timestamp;
 //@Where(clause = "deleted=false")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User implements Serializable {
+
 
 
     @Id
@@ -51,8 +53,8 @@ public class User implements Serializable {
 //  @Column(nullable = false)
     private String password;
 
-//  @OneToOne(fetch = FetchType.EAGER)
-//  private Roles roles;
+    private RoleEnum roles;
+
     
     @CreationTimestamp
     @Column(updatable = false)

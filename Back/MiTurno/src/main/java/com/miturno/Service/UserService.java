@@ -5,8 +5,9 @@ import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.User;
 import java.util.List;
 
+import com.miturno.models.dto.LoginRequest;
+import com.miturno.models.dto.UserResponse;
 import com.sun.corba.se.impl.protocol.RequestCanceledException;
-import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -29,5 +30,5 @@ public interface UserService {
 
     public void registerUser(User user) throws InvalidUserException;
 
-    public User validationUser(User user) throws InvalidUserException, NotFoundException, RequestCanceledException;
+    public UserResponse validationUser(LoginRequest user) throws InvalidUserException, NotFoundException, RequestCanceledException;
 }

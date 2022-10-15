@@ -101,6 +101,23 @@
             <version>5.3.22</version>
             <type>jar</type>
         </dependency>
+
+        <dependency>
+             <groupId>org.mapstruct</groupId>
+             <artifactId>mapstruct</artifactId>
+             <version>1.4.2.Final</version>
+             <scope>compile</scope>
+             </dependency>
+         <dependency>
+         <groupId>org.mapstruct</groupId>
+         <artifactId>mapstruct-processor</artifactId>
+         <version>1.4.2.Final</version>
+         </dependency>
+         <dependency>
+         <groupId>org.projectlombok</groupId>
+         <artifactId>lombok-mapstruct-binding</artifactId>
+         <version>0.2.0</version>
+         </dependency>
     </dependencies>
 
     <build>
