@@ -3,6 +3,7 @@ package com.miturno.Service;
 import com.miturno.exceptions.InvalidUserException;
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.User;
+import com.miturno.models.enums.RoleEnum;
 import com.miturno.repositories.UserRepository;
 import com.miturno.util.Encrypter;
 import com.miturno.util.Validation;
@@ -90,10 +91,13 @@ public class UserServiceImpl implements UserService{
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Document no exist");
     }
 
-
-
-
-
+    @Override
+    public void addRoleToUser(User user, RoleEnum role) throws NotFoundException {
+        
+        user.setRoles(role);
+        userRepo.save(user);
+        
+    }
 
 
 }

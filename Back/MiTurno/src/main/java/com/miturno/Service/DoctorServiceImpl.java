@@ -18,6 +18,7 @@ import com.miturno.exceptions.InvalidDoctorException;
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.Doctor;
 import com.miturno.repositories.DoctorRepository;
+import com.miturno.util.intToDayFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
@@ -33,6 +34,9 @@ public class DoctorServiceImpl implements DoctorService{
 
     @Autowired
     private Validation validation;
+    
+    @Autowired
+    private intToDayFactory intToDayFactory;
 
     @Override
     public List<Doctor> getDoctors() throws NotFoundException {
@@ -67,10 +71,11 @@ public class DoctorServiceImpl implements DoctorService{
         validation.validationDocument(doctor.getDocument());
 
         // Esto pasalo donde quieras
-        ArrayList<DayOfWeek> dias = new ArrayList<>();
-        for(int i= 0; i < days.size(); i++) {
-            dias.add(DayOfWeek.of(days.get(i)));
-        }
+//        ArrayList<DayOfWeek> dias = new ArrayList<>();
+//        for(int i= 0; i < days.size(); i++) {
+//            dias.add(DayOfWeek.of(days.get(i)));
+//        }
+        ArrayList<DayOfWeek> dias = intToDayFactory.intToDayFactory(days);
         doctor.setAttentionDays(dias);
         doctor.setPassword(encrypter.EncrypterPassword(doctor.getPassword()));
         saveDoctor(doctor);

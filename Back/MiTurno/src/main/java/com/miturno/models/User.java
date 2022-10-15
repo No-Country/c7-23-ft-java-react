@@ -1,6 +1,7 @@
 package com.miturno.models;
 
 import com.miturno.models.enums.DocumentType;
+import com.miturno.models.enums.RoleEnum;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,12 +13,14 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Data
 @Table(name = "users")
-//@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id=?")
-//@Where(clause = "deleted=false")
+@SQLDelete(sql = "UPDATE users SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User implements Serializable {
 
@@ -52,7 +55,7 @@ public class User implements Serializable {
     private String password;
 
 //  @OneToOne(fetch = FetchType.EAGER)
-//  private Roles roles;
+    private RoleEnum roles;
     
     @CreationTimestamp
     @Column(updatable = false)

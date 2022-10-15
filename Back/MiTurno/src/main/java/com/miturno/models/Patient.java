@@ -20,7 +20,9 @@ import javax.persistence.Table;
 import com.miturno.models.enums.DocumentType;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.annotations.Where;
 
 /**
  *
@@ -30,8 +32,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 @Data
 @Table(name = "patients")
-//@SQLDelete(sql = "UPDATE patients SET deleted = true WHERE id=?")
-//@Where(clause= "deleted=false")
+@SQLDelete(sql = "UPDATE patients SET deleted = true WHERE id=?")
+@Where(clause= "deleted=false")
 public class Patient implements Serializable {
     
     @Id
