@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -55,7 +56,7 @@ public class User implements Serializable {
     private String password;
 
 //  @OneToOne(fetch = FetchType.EAGER)
-    private RoleEnum roles;
+    private ArrayList<RoleEnum> roles = new ArrayList<>();
     
     @CreationTimestamp
     @Column(updatable = false)
