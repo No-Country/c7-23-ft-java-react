@@ -78,7 +78,7 @@ public class TurnServiceImpl implements TurnService{
         else {
             lastDay = LocalDate.of(year+1, 1, 1);
         }
-        List<DayOfWeek> dias = doctor.getAtentionDays();
+        List<DayOfWeek> dias = doctor.getAttentionDays();
         ArrayList<LocalDate> diasLaborablesDelMes = new ArrayList<>();
         
         //agrega dias al array diasLaborablesDelMes segun los dias que trabaje el médico
@@ -92,7 +92,7 @@ public class TurnServiceImpl implements TurnService{
         //asigna turnos vacíos disponibles cada 30 minutos a ese médico
         
         //Turno mañana
-        if(doctor.getAtentionTurn().contains(1)){
+        if(doctor.getAttentionTurn().contains(1)){
             LocalTime lastTurn = LocalTime.of(13, 30);
             for(int i = 0; i < diasLaborablesDelMes.size(); i++) {
                 for(LocalTime firstTurn = LocalTime.of(8, 0); firstTurn.isBefore(lastTurn); firstTurn = firstTurn.plusMinutes(30)){
@@ -109,7 +109,7 @@ public class TurnServiceImpl implements TurnService{
         
         //Turno Tarde
         
-         if(doctor.getAtentionTurn().contains(2)){
+         if(doctor.getAttentionTurn().contains(2)){
             LocalTime lastTurn = LocalTime.of(20, 30);
             for(int i = 0; i < diasLaborablesDelMes.size(); i++) {
                 for(LocalTime firstTurn = LocalTime.of(14, 0); firstTurn.isBefore(lastTurn); firstTurn = firstTurn.plusMinutes(30)){
