@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void addRoleToUser(User user, RoleEnum role) throws NotFoundException {
         
-        user.setRoles(role);
+       // user.setRoles(role);
         userRepo.save(user);
         
     }

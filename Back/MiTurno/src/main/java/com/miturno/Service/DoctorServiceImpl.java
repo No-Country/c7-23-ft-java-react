@@ -71,11 +71,11 @@ public class DoctorServiceImpl implements DoctorService{
         validation.validationDocument(doctor.getDocument());
 
         // Esto pasalo donde quieras
-//        ArrayList<DayOfWeek> dias = new ArrayList<>();
-//        for(int i= 0; i < days.size(); i++) {
-//            dias.add(DayOfWeek.of(days.get(i)));
-//        }
-        ArrayList<DayOfWeek> dias = intToDayFactory.intToDayFactory(days);
+        ArrayList<DayOfWeek> dias = new ArrayList<>();
+        for(int i= 0; i < days.size(); i++) {
+            dias.add(DayOfWeek.of(days.get(i)));
+        }
+  //      ArrayList<DayOfWeek> dias = intToDayFactory.intToDayFactory(days);
         doctor.setAttentionDays(dias);
         doctor.setPassword(encrypter.EncrypterPassword(doctor.getPassword()));
         saveDoctor(doctor);

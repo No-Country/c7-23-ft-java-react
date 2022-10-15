@@ -14,22 +14,22 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  *
  * @author Leonardo Terlizzi
  */
-@Configuration @RequiredArgsConstructor
-@EnableWebSecurity
+//@Configuration @RequiredArgsConstructor
+//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable();
-        http.anonymous();
-        //http.authorizeRequests()
-          //         .antMatchers(HttpMethod.GET)
-    }
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        super.configure(web); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-    }
-    
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.cors().and().csrf().disable();
+//        http.anonymous();
+//        //http.authorizeRequests()
+//          //         .antMatchers(HttpMethod.GET)
+//    }
+//
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        super.configure(web); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+//    }
+//    
     
 }
