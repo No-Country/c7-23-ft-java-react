@@ -1,10 +1,8 @@
 package com.miturno.models;
 
-import com.miturno.models.enums.DocumentTipe;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -18,11 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.miturno.models.enums.DocumentType;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
 
 /**
  *
@@ -47,7 +45,7 @@ public class Patient implements Serializable {
     private String last_name;
     
     @Enumerated(value = EnumType.STRING)
-    private DocumentTipe documentTipe;
+    private DocumentType documentType;
     
     @Column(unique = true, nullable = false)
     private Long document;

@@ -1,11 +1,10 @@
 package com.miturno.models;
 
-import com.miturno.models.enums.DocumentTipe;
+import com.miturno.models.enums.DocumentType;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.annotations.Where;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -38,7 +37,7 @@ public class User implements Serializable {
 
     @NotNull(message = "DocumentType cannot be null")
     @Enumerated(value = EnumType.STRING)
-    private DocumentTipe DocumentType;
+    private DocumentType documentType;
 
     @NotNull(message = "Document cannot be null")
 //  @Column(unique = true, nullable = false)

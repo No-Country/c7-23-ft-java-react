@@ -7,7 +7,7 @@ public class PatientResponse {
 
     private Long id;
     private String fullName;
-    private String DocumentType;
+    private String documentType;
     private Long document;
     private String phone;
     private String email;
