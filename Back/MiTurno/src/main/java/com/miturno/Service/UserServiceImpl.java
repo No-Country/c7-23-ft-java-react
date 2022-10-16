@@ -2,13 +2,12 @@ package com.miturno.Service;
 
 import com.miturno.exceptions.InvalidUserException;
 import com.miturno.exceptions.NotFoundException;
+import com.miturno.models.Role;
 import com.miturno.models.User;
-import com.miturno.models.enums.RoleEnum;
 import com.miturno.repositories.UserRepository;
 import com.miturno.util.Encrypter;
 import com.miturno.util.Validation;
 import com.sun.corba.se.impl.protocol.RequestCanceledException;
-import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +26,7 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepo;
+    
     @Autowired
     private Encrypter encrypter;
 
@@ -92,9 +92,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void addRoleToUser(User user, RoleEnum role) throws NotFoundException {
-        
-       // user.setRoles(role);
+    public void addRoleToUser(User user, Role role) throws NotFoundException {
+        user.setRole(role);
         userRepo.save(user);
         
     }

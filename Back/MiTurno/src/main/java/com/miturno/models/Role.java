@@ -35,9 +35,9 @@ public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Enumerated(value = EnumType.STRING)
+    
     @Column(nullable = false)
-    private RoleEnum roleName;
+    private String roleName;
     
     @Column(nullable = false)
     private String description;

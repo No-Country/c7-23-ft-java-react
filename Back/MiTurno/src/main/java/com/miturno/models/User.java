@@ -56,7 +56,7 @@ public class User implements Serializable {
     private String password;
 
 //  @OneToOne(fetch = FetchType.EAGER)
-    private ArrayList<RoleEnum> roles = new ArrayList<>();
+    private Role role;
     
     @CreationTimestamp
     @Column(updatable = false)
