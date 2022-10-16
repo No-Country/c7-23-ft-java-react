@@ -12,7 +12,8 @@ public class DoctorResponse {
 
     private String roles;
     private Long id;
-    private String fullName;
+    private String name;
+    private String lastName;
     private String documentType;
     private Long document;
     private String email;

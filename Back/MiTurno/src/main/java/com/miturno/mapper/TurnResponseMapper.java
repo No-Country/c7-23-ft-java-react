@@ -8,15 +8,15 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface TurnResponseMapper {
-    @Mappings(value = {
-            @Mapping(target = "avaible", ignore = true),
-            @Mapping(target = "locked", ignore = true),
-            @Mapping(target = "id", source = "idTurn"),
-            @Mapping(target = "doctor.id", source = "idDoctor"),
-            @Mapping(target = "patient.id", source = "idPatient")
+    @Mappings({
+
+            @Mapping(target = "idTurn", source = "id"), //Invertir?
+            @Mapping(target = "idDoctor", source = "doctor.id"),
+            @Mapping(target = "idPatient", source = "patient.id")
     })
-    public Turn TurnResponseToTurn(TurnResponse turnResponse);
     public TurnResponse turnToTurnResponse(Turn turn);
+    public Turn TurnResponseToTurn(TurnResponse turnResponse);
+
 }

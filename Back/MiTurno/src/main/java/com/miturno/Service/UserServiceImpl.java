@@ -10,7 +10,9 @@ import com.miturno.repositories.UserRepository;
 import com.miturno.util.Encrypter;
 import com.miturno.util.Validation;
 import com.sun.corba.se.impl.protocol.RequestCanceledException;
+import org.mapstruct.Qualifier;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -35,6 +37,11 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     Validation validation;
+
+    public UserServiceImpl( UserResponseMapper mapper) {
+        this.mapper = mapper;
+    }
+
 
     @Override
     public List<User> getUsers() throws NotFoundException {

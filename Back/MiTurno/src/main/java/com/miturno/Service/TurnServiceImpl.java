@@ -71,11 +71,11 @@ public class TurnServiceImpl implements TurnService{
 
     @Override
     public void lockTurn(Turn turn) throws InvalidTurnException {
-        if(turn.getAvaible() && turn.getLocked()) {
+        if(turn.getAvailable() && turn.getLocked()) {
            turn.setLocked(Boolean.TRUE);
            turnRepo.save(turn);
         }
-        if(turn.getAvaible() && !turn.getLocked()) {
+        if(turn.getAvailable() && !turn.getLocked()) {
            turn.setLocked(Boolean.FALSE);
            turnRepo.save(turn);
         }
@@ -112,7 +112,7 @@ public class TurnServiceImpl implements TurnService{
                 for(LocalTime firstTurn = LocalTime.of(8, 0); firstTurn.isBefore(lastTurn); firstTurn = firstTurn.plusMinutes(30)){
                 Turn turno = new Turn();
                 turno.setDoctor(doctor);
-                turno.setAvaible(Boolean.TRUE);
+                turno.setAvailable(Boolean.TRUE);
                 turno.setLocked(Boolean.FALSE);
                 turno.setDay(diasLaborablesDelMes.get(i));
                 turno.setHora(firstTurn);
@@ -129,7 +129,7 @@ public class TurnServiceImpl implements TurnService{
                 for(LocalTime firstTurn = LocalTime.of(14, 0); firstTurn.isBefore(lastTurn); firstTurn = firstTurn.plusMinutes(30)){
                 Turn turno = new Turn();
                 turno.setDoctor(doctor);
-                turno.setAvaible(Boolean.TRUE);
+                turno.setAvailable(Boolean.TRUE);
                 turno.setLocked(Boolean.FALSE);
                 turno.setDay(diasLaborablesDelMes.get(i));
                 turno.setHora(firstTurn);
