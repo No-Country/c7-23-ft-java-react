@@ -1,8 +1,10 @@
 package com.miturno.controller;
 
+import com.miturno.Service.RoleService;
 import com.miturno.Service.UserService;
 import com.miturno.exceptions.InvalidUserException;
 import com.miturno.exceptions.NotFoundException;
+import com.miturno.models.Role;
 import com.miturno.models.User;
 import java.util.List;
 import javax.validation.Valid;
@@ -28,6 +30,9 @@ public class UserController {
     
     @Autowired
     private UserService userServ;
+    
+    @Autowired
+    private RoleService roleServ;
     
     @GetMapping("/users")
     @ResponseBody
@@ -61,5 +66,12 @@ public class UserController {
     @ResponseBody
     public User login(@RequestBody User user) throws InvalidUserException, NotFoundException {
         return userServ.validationUser(user);
+    }
+    
+    @PatchMapping("user/role")
+    public void addRoleToUser(@RequestParam Long user_id, @RequestParam Long role_id) throws NotFoundException{
+        Role role = roleServ.getRole(role_id);
+        User user = userServ.getUser(role_id);
+        userServ.addRoleToUser(user, role);
     }
 }

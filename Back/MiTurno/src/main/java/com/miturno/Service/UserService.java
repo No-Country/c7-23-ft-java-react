@@ -2,6 +2,7 @@ package com.miturno.Service;
 
 import com.miturno.exceptions.InvalidUserException;
 import com.miturno.exceptions.NotFoundException;
+import com.miturno.models.Role;
 import com.miturno.models.User;
 import com.miturno.models.enums.RoleEnum;
 import java.util.List;
@@ -32,5 +33,5 @@ public interface UserService {
 
     public User validationUser(User user) throws InvalidUserException, NotFoundException, RequestCanceledException;
     
-    public void addRoleToUser(User user, RoleEnum role) throws NotFoundException;
+    public void addRoleToUser(User user, Role role) throws NotFoundException;
 }

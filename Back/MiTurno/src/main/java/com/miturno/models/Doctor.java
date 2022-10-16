@@ -56,7 +56,7 @@ public class Doctor extends User  {
         private List<Integer> attentionTurn = new ArrayList<>(); // 1 mañana (8 a 13), 2 tarde (14 a 20)
         
         @OneToMany(fetch = FetchType.LAZY)
-        private List<Turn> turns;
+        private List<Turn> turns = new ArrayList<>();
 
 	private Boolean available;
 	
