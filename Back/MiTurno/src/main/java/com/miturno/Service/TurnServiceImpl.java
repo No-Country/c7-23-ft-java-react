@@ -4,13 +4,14 @@ package com.miturno.Service;
 import com.miturno.exceptions.InvalidDoctorException;
 import com.miturno.exceptions.InvalidTurnException;
 import com.miturno.exceptions.NotFoundException;
+import com.miturno.mapper.TurnResponseMapper;
 import com.miturno.models.Doctor;
 import com.miturno.models.Turn;
+import com.miturno.models.dto.TurnResponse;
 import com.miturno.repositories.TurnRepository;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -27,10 +28,23 @@ public class TurnServiceImpl implements TurnService{
     @Autowired
     private TurnRepository turnRepo;
 
+    @Autowired
+    private TurnResponseMapper mapper;
 
     @Override
-    public List<Turn> getTurns() throws NotFoundException {
-        return  turnRepo.findAll();
+    public List<TurnResponse> getTurns() throws NotFoundException {
+        Optional<List<Turn>> listTurnsOptional = Optional.ofNullable(turnRepo.findAll());
+        List<TurnResponse> listTurnResponse = new ArrayList<>();
+        if (listTurnsOptional.isPresent()){
+            List<Turn> listTurn = listTurnsOptional.get();
+
+            for (Turn turn : listTurn) {
+                listTurnResponse.add(mapper.turnToTurnResponse(turn));
+            }
+            return listTurnResponse;
+        }else {
+            return listTurnResponse;
+        }
     }
 
     @Override
