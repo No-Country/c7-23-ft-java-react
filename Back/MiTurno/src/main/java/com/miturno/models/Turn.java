@@ -47,7 +47,7 @@ public class Turn {
     @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor doctor;
     
-    private Boolean avaible;
+    private Boolean available;
     
     private Boolean locked;
 

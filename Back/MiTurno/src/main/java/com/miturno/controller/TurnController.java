@@ -11,6 +11,8 @@ import com.miturno.models.Doctor;
 import com.miturno.models.Patient;
 import com.miturno.models.Turn;
 import java.util.List;
+
+import com.miturno.models.dto.TurnResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +41,7 @@ public class TurnController {
     
     @GetMapping("/turns")
     @ResponseBody
-    public List<Turn> getTurns() throws NotFoundException {
+    public List<TurnResponse> getTurns() throws NotFoundException {
         return turnServ.getTurns();
     }
     

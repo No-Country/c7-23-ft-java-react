@@ -7,8 +7,9 @@ import com.miturno.models.User;
 import com.miturno.models.enums.RoleEnum;
 import java.util.List;
 
+import com.miturno.models.dto.LoginRequest;
+import com.miturno.models.dto.UserResponse;
 import com.sun.corba.se.impl.protocol.RequestCanceledException;
-import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,4 +35,7 @@ public interface UserService {
     public User validationUser(User user) throws InvalidUserException, NotFoundException, RequestCanceledException;
     
     public void addRoleToUser(User user, Role role) throws NotFoundException;
+
+    public UserResponse validationUser(LoginRequest user) throws InvalidUserException, NotFoundException, RequestCanceledException;
+
 }

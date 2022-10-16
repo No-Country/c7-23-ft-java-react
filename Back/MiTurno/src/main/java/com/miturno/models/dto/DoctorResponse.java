@@ -10,9 +10,10 @@ import java.util.List;
 @Data
 public class DoctorResponse {
 
-    private String rol;
+    private String roles;
     private Long id;
-    private String fullName;
+    private String name;
+    private String lastName;
     private String documentType;
     private Long document;
     private String email;

@@ -72,7 +72,7 @@ public class Patient implements Serializable {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "turn_id", referencedColumnName = "id")
     @ElementCollection
-    private List<Turn> turnos = new ArrayList<>();
+    private List<Turn> turns = new ArrayList<>();
     
     @CreationTimestamp
     @Column(updatable = false)

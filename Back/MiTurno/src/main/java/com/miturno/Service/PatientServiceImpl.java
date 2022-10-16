@@ -1,15 +1,20 @@
 package com.miturno.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.miturno.exceptions.InvalidPatientException;
+import com.miturno.mapper.PatientResponseMapper;
+import com.miturno.models.Doctor;
+import com.miturno.models.dto.DoctorResponse;
+import com.miturno.models.dto.PatientResponse;
 import org.springframework.stereotype.Service;
 
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.Patient;
 import com.miturno.models.Turn;
 import com.miturno.repositories.PatientRepository;
-import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
@@ -17,10 +22,23 @@ public class PatientServiceImpl implements PatientService{
     
     @Autowired
     private PatientRepository patientRepo;
+    @Autowired
+    private PatientResponseMapper mapper;
 
     @Override
-    public List<Patient> getPatients() throws NotFoundException {
-        return patientRepo.findAll();
+    public List<PatientResponse> getPatients() throws NotFoundException {
+        Optional<List<Patient>> listPatientsOptional = Optional.ofNullable(patientRepo.findAll());
+        List<PatientResponse> listPatientResponse = new ArrayList<>();
+        if (listPatientsOptional.isPresent()){
+            List<Patient> listPatient = listPatientsOptional.get();
+
+            for (Patient patient : listPatient) {
+                listPatientResponse.add(mapper.patientToPatientResponse(patient));
+            }
+            return listPatientResponse;
+        }else {
+            return listPatientResponse;
+        }
     }
 
     @Override

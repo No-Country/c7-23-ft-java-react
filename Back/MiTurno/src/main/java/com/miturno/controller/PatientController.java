@@ -3,6 +3,7 @@ package com.miturno.controller;
 import java.util.List;
 
 import com.miturno.exceptions.InvalidPatientException;
+import com.miturno.models.dto.PatientResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ public class PatientController {
 
     @GetMapping("/patients")
     @ResponseBody
-    public List<Patient> getPatients() throws NotFoundException{
+    public List<PatientResponse> getPatients() throws NotFoundException{
         return patServ.getPatients();        
     }
 

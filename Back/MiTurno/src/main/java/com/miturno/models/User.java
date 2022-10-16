@@ -26,6 +26,7 @@ import org.hibernate.annotations.Where;
 public class User implements Serializable {
 
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -56,7 +57,10 @@ public class User implements Serializable {
     private String password;
 
 //  @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne
+    @JoinColumn(name = "role_id")
     private Role role;
+
     
     @CreationTimestamp
     @Column(updatable = false)

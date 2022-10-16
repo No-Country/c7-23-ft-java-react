@@ -9,6 +9,8 @@ import com.miturno.models.User;
 import java.util.List;
 import javax.validation.Valid;
 
+import com.miturno.models.dto.LoginRequest;
+import com.miturno.models.dto.UserResponse;
 import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -64,7 +66,7 @@ public class UserController {
 
     @PostMapping("/auth/login")
     @ResponseBody
-    public User login(@RequestBody User user) throws InvalidUserException, NotFoundException {
+    public UserResponse login(@RequestBody LoginRequest user) throws InvalidUserException, NotFoundException {
         return userServ.validationUser(user);
     }
     

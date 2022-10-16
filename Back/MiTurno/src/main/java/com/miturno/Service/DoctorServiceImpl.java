@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.miturno.exceptions.InvalidUserException;
-import com.miturno.models.User;
+import com.miturno.mapper.DoctorResponseMapper;
+import com.miturno.models.dto.DoctorResponse;
 import com.miturno.util.Encrypter;
 import com.miturno.util.Validation;
 import com.sun.corba.se.impl.protocol.RequestCanceledException;
@@ -20,7 +21,6 @@ import com.miturno.models.Doctor;
 import com.miturno.repositories.DoctorRepository;
 import com.miturno.util.intToDayFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
@@ -38,9 +38,24 @@ public class DoctorServiceImpl implements DoctorService{
     @Autowired
     private intToDayFactory intToDayFactory;
 
+    @Autowired
+    private DoctorResponseMapper mapper;
+
     @Override
-    public List<Doctor> getDoctors() throws NotFoundException {
-        return docRepo.findAll();
+    public List<DoctorResponse> getDoctors() throws NotFoundException {
+
+        Optional<List<Doctor>> listDoctorsOptional = Optional.ofNullable(docRepo.findAll());
+        List<DoctorResponse> listDoctorResponse = new ArrayList<>();
+        if (listDoctorsOptional.isPresent()){
+            List<Doctor> listDoctor = listDoctorsOptional.get();
+
+            for (Doctor doctor : listDoctor) {
+                listDoctorResponse.add(mapper.doctorToDoctorResponse(doctor));
+            }
+            return listDoctorResponse;
+        }else {
+            return listDoctorResponse;
+        }
     }
 
     @Override
