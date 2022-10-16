@@ -73,13 +73,13 @@ public class PatientServiceImpl implements PatientService{
         Patient patient = patientRepo.findByDocument(document);
         
         
-        List<Turn> turnos = patient.getTurnos();
-        if(turnos != null){
-                    return turnos.get(turnos.size() -1);
+        List<Turn> turns = patient.getTurns();
+        if(turns != null){
+                    return turns.get(turns.size() -1);
 
         }
         else{ 
-        return (Turn) turnos;}
+        return (Turn) turns;}
        
     }
 

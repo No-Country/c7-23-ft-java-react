@@ -151,13 +151,13 @@ public class TurnServiceImpl implements TurnService{
                 LocalTime lastTurn = LocalTime.of(13, 30);
                 for(int i = 0; i < diasLaborablesDelMes.size(); i++) {
                     for(LocalTime firstTurn = LocalTime.of(8, 0); firstTurn.isBefore(lastTurn); firstTurn = firstTurn.plusMinutes(30)){
-                        Turn turno = new Turn();
-                        turno.setDoctor(doctor);
-                        turno.setAvailable(Boolean.TRUE);
-                        turno.setLocked(Boolean.FALSE);
-                        turno.setDay(diasLaborablesDelMes.get(i));
-                        turno.setHora(firstTurn);
-                        turnRepo.save(turno);
+                        Turn turn = new Turn();
+                        turn.setDoctor(doctor);
+                        turn.setAvailable(Boolean.TRUE);
+                        turn.setLocked(Boolean.FALSE);
+                        turn.setDay(diasLaborablesDelMes.get(i));
+                        turn.setHora(firstTurn);
+                        turnRepo.save(turn);
                     }
                 }
             }
@@ -168,13 +168,13 @@ public class TurnServiceImpl implements TurnService{
                 LocalTime lastTurn = LocalTime.of(20, 30);
                 for(int i = 0; i < diasLaborablesDelMes.size(); i++) {
                     for(LocalTime firstTurn = LocalTime.of(14, 0); firstTurn.isBefore(lastTurn); firstTurn = firstTurn.plusMinutes(30)){
-                        Turn turno = new Turn();
-                        turno.setDoctor(doctor);
-                        turno.setAvailable(Boolean.TRUE);
-                        turno.setLocked(Boolean.FALSE);
-                        turno.setDay(diasLaborablesDelMes.get(i));
-                        turno.setHora(firstTurn);
-                        turnRepo.save(turno);
+                        Turn turn = new Turn();
+                        turn.setDoctor(doctor);
+                        turn.setAvailable(Boolean.TRUE);
+                        turn.setLocked(Boolean.FALSE);
+                        turn.setDay(diasLaborablesDelMes.get(i));
+                        turn.setHora(firstTurn);
+                        turnRepo.save(turn);
                     }
                 }
             }

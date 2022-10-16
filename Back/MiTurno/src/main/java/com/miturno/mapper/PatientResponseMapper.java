@@ -13,8 +13,8 @@ public interface PatientResponseMapper {
 
     @Mappings({
 
-            @Mapping(target = "idPatient", source = "id"), //Invertir?
-            @Mapping(target = "idTurns", source = "turns.id"),
+            //@Mapping(target = "idPatient", source = "id") //Invertir?
+            //@Mapping(target = "idTurns", source = "turns.id"),
     })
     public PatientResponse patientToPatientResponse(Patient patient);
     public Patient patientResponseToPatient(PatientResponse patientResponse);
