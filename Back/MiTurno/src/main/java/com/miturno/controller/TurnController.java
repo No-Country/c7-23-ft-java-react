@@ -2,11 +2,13 @@
 package com.miturno.controller;
 
 import com.miturno.Service.DoctorService;
+import com.miturno.Service.PatientService;
 import com.miturno.Service.TurnService;
 import com.miturno.exceptions.InvalidDoctorException;
 import com.miturno.exceptions.InvalidTurnException;
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.Doctor;
+import com.miturno.models.Patient;
 import com.miturno.models.Turn;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class TurnController {
     
     @Autowired
     private DoctorService docServ;
+    
+    @Autowired
+    private PatientService patServ;
     
     @GetMapping("/turns")
     @ResponseBody
@@ -72,4 +77,10 @@ public class TurnController {
         turnServ.lockTurn(turn);
     }
     
+    @PostMapping("/turn/addpatient")
+    public void addPatientToTurn(@RequestParam Long turn_id, @RequestParam Long patient_id) throws NotFoundException {
+        Patient patient = patServ.getPatient(patient_id);
+        Turn turn = turnServ.getTurn(turn_id);
+        turnServ.addPatientToTurn(patient, turn);       
+    }
 }

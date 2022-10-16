@@ -53,8 +53,15 @@ public class PatientServiceImpl implements PatientService{
     @Override
     public Turn getLastTurnByDocument(Long document) throws NotFoundException {
         Patient patient = patientRepo.findByDocument(document);
+        
+        
         List<Turn> turnos = patient.getTurnos();
-        return turnos.get(turnos.size() -1);
+        if(turnos != null){
+                    return turnos.get(turnos.size() -1);
+
+        }
+        else{ 
+        return (Turn) turnos;}
        
     }
 

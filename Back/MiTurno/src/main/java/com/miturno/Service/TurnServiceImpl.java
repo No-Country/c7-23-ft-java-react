@@ -5,6 +5,8 @@ import com.miturno.exceptions.InvalidDoctorException;
 import com.miturno.exceptions.InvalidTurnException;
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.Doctor;
+import com.miturno.models.MonthCalendar;
+import com.miturno.models.Patient;
 import com.miturno.models.Turn;
 import com.miturno.repositories.TurnRepository;
 import java.time.DayOfWeek;
@@ -26,6 +28,9 @@ public class TurnServiceImpl implements TurnService{
     
     @Autowired
     private TurnRepository turnRepo;
+    
+    @Autowired
+    private MonthCalendarService calendarServ;
 
 
     @Override
@@ -69,8 +74,29 @@ public class TurnServiceImpl implements TurnService{
     }
 
     @Override
-    public void flushTurns(Doctor doctor, int month, int year) throws InvalidDoctorException {
-        //LocalDate firstDay = LocalDate.of(year, month, 1);
+    public void addPatientToTurn(Patient patient, Turn turn) throws NotFoundException {
+        turn.setPatient(patient);
+        turnRepo.save(turn);
+    }
+    
+    
+    
+    
+    
+    //metodos de calendario
+    
+    public Boolean calendarChecker(List<MonthCalendar> calendars, int year, int month) {
+         for(MonthCalendar calendar: calendars) {
+            if (calendar.getAnio() == year && calendar.getMes() == month){
+                return true;
+            }
+            
+        }
+        return false;
+    }
+    
+    public ArrayList<LocalDate> addDiasLaboralesDelmes(Doctor doctor, int year, int month) {
+
         LocalDate lastDay;
         if(month != 12) {
             lastDay = LocalDate.of(year, month+1, 1);
@@ -87,42 +113,57 @@ public class TurnServiceImpl implements TurnService{
                 diasLaborablesDelMes.add(firstDay);
             }
         }
+        return diasLaborablesDelMes;   
+    }
+
+    @Override
+    public void flushTurns(Doctor doctor, int month, int year) throws InvalidDoctorException {
+        Long doc_id = doctor.getId();
+        List<MonthCalendar> calendars = calendarServ.getCalendarsByDoctorId(doc_id);
+      
+        Boolean alreadyDone = calendarChecker(calendars, year, month);
         
-        //Con el calendario armado según los días que trabaje el médico, según el turno (Mañana o tarde,
-        //asigna turnos vacíos disponibles cada 30 minutos a ese médico
+        if(!alreadyDone) {
+            ArrayList<LocalDate> diasLaborablesDelMes = addDiasLaboralesDelmes(doctor, year, month);
+    
         
-        //Turno mañana
-        if(doctor.getAttentionTurn().contains(1)){
-            LocalTime lastTurn = LocalTime.of(13, 30);
-            for(int i = 0; i < diasLaborablesDelMes.size(); i++) {
-                for(LocalTime firstTurn = LocalTime.of(8, 0); firstTurn.isBefore(lastTurn); firstTurn = firstTurn.plusMinutes(30)){
-                Turn turno = new Turn();
-                turno.setDoctor(doctor);
-                turno.setAvaible(Boolean.TRUE);
-                turno.setLocked(Boolean.FALSE);
-                turno.setDay(diasLaborablesDelMes.get(i));
-                turno.setHora(firstTurn);
-                turnRepo.save(turno);
+            //Con el calendario armado según los días que trabaje el médico, según el turno (Mañana o tarde,
+            //asigna turnos vacíos disponibles cada 30 minutos a ese médico
+
+            //Turno mañana
+            if(doctor.getAttentionTurn().contains(1)){
+                LocalTime lastTurn = LocalTime.of(13, 30);
+                for(int i = 0; i < diasLaborablesDelMes.size(); i++) {
+                    for(LocalTime firstTurn = LocalTime.of(8, 0); firstTurn.isBefore(lastTurn); firstTurn = firstTurn.plusMinutes(30)){
+                    Turn turno = new Turn();
+                    turno.setDoctor(doctor);
+                    turno.setAvaible(Boolean.TRUE);
+                    turno.setLocked(Boolean.FALSE);
+                    turno.setDay(diasLaborablesDelMes.get(i));
+                    turno.setHora(firstTurn);
+                    turnRepo.save(turno);
+                    }
                 }
             }
-        }
-        
-        //Turno Tarde
-        
-         if(doctor.getAttentionTurn().contains(2)){
-            LocalTime lastTurn = LocalTime.of(20, 30);
-            for(int i = 0; i < diasLaborablesDelMes.size(); i++) {
-                for(LocalTime firstTurn = LocalTime.of(14, 0); firstTurn.isBefore(lastTurn); firstTurn = firstTurn.plusMinutes(30)){
-                Turn turno = new Turn();
-                turno.setDoctor(doctor);
-                turno.setAvaible(Boolean.TRUE);
-                turno.setLocked(Boolean.FALSE);
-                turno.setDay(diasLaborablesDelMes.get(i));
-                turno.setHora(firstTurn);
-                turnRepo.save(turno);
+
+            //Turno Tarde
+
+             if(doctor.getAttentionTurn().contains(2)){
+                LocalTime lastTurn = LocalTime.of(20, 30);
+                for(int i = 0; i < diasLaborablesDelMes.size(); i++) {
+                    for(LocalTime firstTurn = LocalTime.of(14, 0); firstTurn.isBefore(lastTurn); firstTurn = firstTurn.plusMinutes(30)){
+                    Turn turno = new Turn();
+                    turno.setDoctor(doctor);
+                    turno.setAvaible(Boolean.TRUE);
+                    turno.setLocked(Boolean.FALSE);
+                    turno.setDay(diasLaborablesDelMes.get(i));
+                    turno.setHora(firstTurn);
+                    turnRepo.save(turno);
+                    }
                 }
             }
-        }
+            }
+        
     }
     
     
