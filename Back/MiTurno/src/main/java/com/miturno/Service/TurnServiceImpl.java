@@ -106,12 +106,16 @@ public class TurnServiceImpl implements TurnService{
     //metodos de calendario
 
     public Boolean calendarChecker(List<MonthCalendar> calendars, int year, int month) {
-        for(MonthCalendar calendar: calendars) {
+        if(calendars != null ) {
+              for(MonthCalendar calendar: calendars) {
             if (calendar.getAnio() == year && calendar.getMes() == month){
                 return true;
             }
 
         }
+              
+        }
+        else return false;
         return false;
     }
 
@@ -135,13 +139,28 @@ public class TurnServiceImpl implements TurnService{
         }
         return diasLaborablesDelMes;
     }
+    
+    public List<MonthCalendar> getCalendarsByDoc(List<MonthCalendar> calendars, Long doc_id){
+        List<MonthCalendar> calendarsReturn = new ArrayList<>();
+        for(MonthCalendar calendar: calendars) {
+            if(calendar.getDoctor().getId() == doc_id) {
+                calendarsReturn.add(calendar);
+            }
+        
+        }
+        return calendarsReturn;
+    }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void flushTurns(Doctor doctor, int month, int year) throws InvalidDoctorException {
         Long doc_id = doctor.getId();
-        List<MonthCalendar> calendars = calendarServ.getCalendarsByDoctorId(doc_id);
-
-        Boolean alreadyDone = calendarChecker(calendars, year, month);
+        List<MonthCalendar> calendars = new ArrayList<>();
+        List<MonthCalendar> calendarsByDoc = new ArrayList<>();
+        calendars = calendarServ.getCalendars();
+        calendarsByDoc = getCalendarsByDoc(calendars, doc_id);
+       
+        Boolean alreadyDone = calendarChecker(calendarsByDoc, year, month);
 
         if(!alreadyDone) {
             ArrayList<LocalDate> diasLaborablesDelMes = addDiasLaboralesDelmes(doctor, year, month);
@@ -164,6 +183,11 @@ public class TurnServiceImpl implements TurnService{
                         turnRepo.save(turn);
                     }
                 }
+                 MonthCalendar calendar = new MonthCalendar();
+                 calendar.setAnio(year);
+                 calendar.setDoctor(doctor);
+                 calendar.setMes(month);
+                 calendarServ.saveCalendar(calendar);
             }
 
             //Turno Tarde
@@ -181,7 +205,13 @@ public class TurnServiceImpl implements TurnService{
                         turnRepo.save(turn);
                     }
                 }
+                 MonthCalendar calendar = new MonthCalendar();
+                 calendar.setAnio(year);
+                 calendar.setDoctor(doctor);
+                 calendar.setMes(month);
+                 calendarServ.saveCalendar(calendar);
             }
+           
         }
 
     }
