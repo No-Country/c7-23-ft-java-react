@@ -2,9 +2,10 @@ package com.miturno.models.dto;
 
 import com.miturno.models.Turn;
 import com.miturno.models.enums.DocumentType;
+import lombok.Data;
 
 import java.util.List;
-
+@Data
 public class PatientResponse {
 
     private Long idPatient;
@@ -16,5 +17,5 @@ public class PatientResponse {
     private String email;
     private String social_work;
     private String clinic_history;
-    private List<Long> idTurns;
+    private List<Turn> turns;
 }

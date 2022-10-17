@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,13 +52,32 @@ public class UserServiceImpl implements UserService{
 
 
     @Override
-    public List<User> getUsers() throws NotFoundException {
-        return userRepo.findAll();
+    public List<UserResponse> getUsers() throws NotFoundException {
+        Optional<List<User>> listUsersOptional = Optional.ofNullable(userRepo.findAll());
+        List<UserResponse> listUserResponse = new ArrayList<>();
+        if (listUsersOptional.isPresent()){
+            List<User> listUser = listUsersOptional.get();
+
+            for (User user : listUser) {
+                listUserResponse.add(mapper.userToUserResponse(user));
+            }
+            return listUserResponse;
+        }else {
+            return listUserResponse;
+        }
     }
 
+
     @Override
-    public User getUser(Long id) throws NotFoundException{
-        return userRepo.findById(id).orElse(null);
+    public UserResponse getUser(Long id) throws NotFoundException{
+        Optional<User> response = userRepo.findById(id);
+
+        if (response.isPresent()){
+           UserResponse userResponse = mapper.userToUserResponse(response.get());
+            return userResponse;
+        }else {
+            return mapper.userToUserResponse(response.get());
+        }
     }
 
     @Override

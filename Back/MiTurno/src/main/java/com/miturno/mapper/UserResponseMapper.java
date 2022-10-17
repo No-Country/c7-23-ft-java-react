@@ -14,10 +14,13 @@ import org.springframework.context.annotation.Primary;
 public interface UserResponseMapper {
 
     @Mappings({
-            @Mapping(target = "password", ignore = true),
-            @Mapping(target = "createAt", ignore = true),
-            @Mapping(target = "updateAt", ignore = true)
+            @Mapping(target = "role", source = "role.roleName"),
+
+
     })
-    public User UserResponseToUser(UserResponse userResponse);
     public UserResponse userToUserResponse(User user);
+
+
+
+
 }

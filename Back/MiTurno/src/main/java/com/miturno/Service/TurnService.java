@@ -19,7 +19,7 @@ public interface TurnService {
     
     public List<TurnResponse> getTurns() throws NotFoundException;
     
-    public Turn getTurn(Long id) throws NotFoundException;
+    public TurnResponse getTurn(Long id) throws NotFoundException;
     
     public void saveTurn(Turn turn) throws InvalidTurnException;
     

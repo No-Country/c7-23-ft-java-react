@@ -13,6 +13,7 @@ import com.miturno.models.Turn;
 import java.util.List;
 
 import com.miturno.models.dto.TurnResponse;
+import com.miturno.repositories.TurnRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,9 @@ public class TurnController {
     
     @Autowired
     private PatientService patServ;
+
+    @Autowired
+    private TurnRepository turnRepo;
     
     @GetMapping("/turns")
     @ResponseBody
@@ -47,7 +51,7 @@ public class TurnController {
     
     @GetMapping("/turn/find")
     @ResponseBody
-    public Turn getTurn(@RequestParam Long id) throws NotFoundException {
+    public TurnResponse getTurn(@RequestParam Long id) throws NotFoundException {
         return turnServ.getTurn(id);
     }
     
@@ -75,14 +79,14 @@ public class TurnController {
     
     @PatchMapping("/turn/lock")
     public void lockTurn(@RequestParam Long id) throws NotFoundException, InvalidTurnException {
-        Turn turn = turnServ.getTurn(id);
+        Turn turn = turnRepo.getReferenceById(id);
         turnServ.lockTurn(turn);
     }
     
     @PostMapping("/turn/addpatient")
     public void addPatientToTurn(@RequestParam Long turn_id, @RequestParam Long patient_id) throws NotFoundException {
         Patient patient = patServ.getPatient(patient_id);
-        Turn turn = turnServ.getTurn(turn_id);
+        Turn turn = turnRepo.getReferenceById(turn_id);
         turnServ.addPatientToTurn(patient, turn);       
     }
 }

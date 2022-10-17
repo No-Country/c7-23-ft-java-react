@@ -5,10 +5,7 @@ import com.miturno.exceptions.InvalidDoctorException;
 import com.miturno.exceptions.InvalidTurnException;
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.mapper.TurnResponseMapper;
-import com.miturno.models.Doctor;
-import com.miturno.models.MonthCalendar;
-import com.miturno.models.Patient;
-import com.miturno.models.Turn;
+import com.miturno.models.*;
 import com.miturno.models.dto.TurnResponse;
 import com.miturno.repositories.TurnRepository;
 import java.time.DayOfWeek;
@@ -53,8 +50,15 @@ public class TurnServiceImpl implements TurnService{
     }
 
     @Override
-    public Turn getTurn(Long id) throws NotFoundException {
-        return turnRepo.findById(id).orElse(null);
+    public TurnResponse getTurn(Long id) throws NotFoundException {
+        Optional<Turn> response = turnRepo.findById(id);
+
+        if (response.isPresent()){
+            TurnResponse turnResponse = mapper.turnToTurnResponse(response.get());
+            return turnResponse;
+        }else {
+            return mapper.turnToTurnResponse(response.get());
+        }
     }
 
     @Override

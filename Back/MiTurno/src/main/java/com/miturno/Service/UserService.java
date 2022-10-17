@@ -4,7 +4,7 @@ import com.miturno.exceptions.InvalidUserException;
 import com.miturno.exceptions.NotFoundException;
 import com.miturno.models.Role;
 import com.miturno.models.User;
-import com.miturno.models.enums.RoleEnum;
+
 import java.util.List;
 
 import com.miturno.models.dto.LoginRequest;
@@ -20,9 +20,9 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
     
-    public List<User> getUsers() throws NotFoundException;
+    public List<UserResponse> getUsers() throws NotFoundException;
     
-    public User getUser(Long id) throws NotFoundException;
+    public UserResponse getUser(Long id) throws NotFoundException;
     
     public void saveUser(User user) throws InvalidUserException;
     
