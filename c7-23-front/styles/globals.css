@@ -12,6 +12,14 @@
   .th-static {
     position: static !important;
   }
+
+  .toastAnimation{
+    animation: toast 0.5s, fadeout 0.5s 2.5s
+  }
+  @keyframes toast {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
 }
 
 @layer components {

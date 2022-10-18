@@ -10,9 +10,8 @@ export function useLogin() {
   const authStore = useAuthStore();
   const router = useRouter();
 
-  const { mutate, isLoading } = useMutation(async (data) => {
+  const { mutate, isLoading, isError, error } = useMutation(async (data) => {
     const { userData = {}, token = "_" } = await postLogin(data);
-
     authStore.setCurrentUser(userData);
     authStore.setToken(token);
 
@@ -21,15 +20,16 @@ export function useLogin() {
 
     router.push("/admin/dashboard");
   });
-
-  return { mutate, isLoading };
+  const codeHttp = error?.response?.status;
+  console.log("mensaje", error?.response?.status);
+  return { mutate, isLoading, isError, codeHttp };
 }
 
 export function useRegister() {
   const authStore = useAuthStore();
   const router = useRouter();
 
-  const { mutate, isLoading } = useMutation(async (data) => {
+  const { mutate, isLoading, isError, error } = useMutation(async (data) => {
     const { userData = {}, token = "_" } = await postRegister(data);
 
     authStore.setCurrentUser(userData);
@@ -40,7 +40,8 @@ export function useRegister() {
 
     router.push("/admin/dashboard");
   });
-  return { mutate, isLoading };
+  const codeHttp = error?.response?.status;
+  return { mutate, isLoading, isError, codeHttp };
 }
 
 export function useLogOut() {
