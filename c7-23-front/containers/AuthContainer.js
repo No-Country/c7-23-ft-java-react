@@ -29,9 +29,6 @@ export default function AuthContainer({ pageTitle = "", children, onSubmit }) {
           <form className="font-medium" onSubmit={onSubmit}>
             {children}
           </form>
-          {/* <p className="mt-3">
-            Don´t have an account? <a className="link link-primary">Sing up</a>
-          </p> */}
         </div>
         <div className="w-full h-full md:flex hidden relative  bg-[#181A2A] justify-center items-center">
           <Image
