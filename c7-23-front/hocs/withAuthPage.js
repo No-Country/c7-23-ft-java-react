@@ -1,19 +1,19 @@
-import { useEffect } from "react"
-import { useRouter } from "next/router"
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-import useAuthStore from "../store/authStore"
+import useAuthStore from "../store/authStore";
 
 export default function withAuthPage(Page) {
   return function Wrapper(pageProps) {
-    const authStore = useAuthStore()
-    const router = useRouter()
+    const authStore = useAuthStore();
+    const router = useRouter();
 
     useEffect(() => {
-      if (!authStore.currentUser || !authStore.token) {
-        router.push("/login")
+      if (!authStore.currentUser) {
+        router.push("/login");
       }
-    }, [authStore, router])
+    }, [authStore, router]);
 
-    return <Page {...pageProps} />
-  }
+    return <Page {...pageProps} />;
+  };
 }

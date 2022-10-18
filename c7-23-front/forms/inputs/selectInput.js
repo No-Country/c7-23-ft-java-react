@@ -1,13 +1,12 @@
 import { useController } from "react-hook-form";
 import { classNames as cls } from "../../utils/styles";
 
-export default function Input({
+export default function SelectInput({
   name,
   control,
   label,
-  placeholder,
-  type = "text",
   right = null,
+  options = [],
   ...rest
 }) {
   const { field, fieldState } = useController({ name, control });
@@ -18,14 +17,25 @@ export default function Input({
     <label>
       {label}
       <div className="w-full relative">
-        <input
+        <select
           {...field}
-          type={type}
-          placeholder={placeholder}
-          className={cls("form-input", !isError && "mb-3")}
+          defaultValue={name}
+          name={name}
+          className={cls("form-select rounded-xl w-full", !isError && "mb-3")}
           {...rest}
-        />
-        {right}
+        >
+          <option value={name} disabled>
+            {name}
+          </option>
+          {options.map((items) => {
+            return (
+              <option key={items} value={items}>
+                {items}
+              </option>
+            );
+          })}
+          {right}
+        </select>
       </div>
       {isError && (
         <div className="mb-3">
