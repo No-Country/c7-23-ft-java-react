@@ -10,9 +10,11 @@ import Input from "../../forms/inputs/Input";
 import SelectInput from "../../forms/inputs/selectInput";
 import SummitButton from "../../components/SummitButton.js";
 import { DOCUMENT_TYPE_OPTIONS } from "../../shared/constants";
+import Toast from "../../components/Toast";
+import { MENSSAGE_HTTP_ERROR } from "../../shared/constants";
 
 export default function RegisterPage() {
-  const { mutate: register, isLoading } = useRegister();
+  const { mutate: register, isLoading, codeHttp, isError } = useRegister();
 
   const {
     handleSubmit,
@@ -71,6 +73,17 @@ export default function RegisterPage() {
         isValid={isValid}
         isLoading={isLoading}
       />
+      {isError && (
+        <Toast
+          timeout={5000}
+          content={
+            codeHttp === 400
+              ? MENSSAGE_HTTP_ERROR[400]
+              : MENSSAGE_HTTP_ERROR.NetworkError
+          }
+          className="alert alert-warning"
+        />
+      )}
     </AuthContainer>
   );
 }
