@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/router";
 
 import postLogin from "../api/postLogin";
@@ -12,11 +12,12 @@ export function useLogin() {
   const router = useRouter();
 
   return useMutation(async (data) => {
-    const { userData = {}, token = "" } = await postLogin(data);
+    const { userData = {}, token = "_" } = await postLogin(data);
 
-    // authStore.setCurrentUser(userData);
-    // authStore.setToken(token);
+    authStore.setCurrentUser(userData);
+    authStore.setToken(token);
 
+    // TODO: Waiting for back changes to enabled this
     // MyTurnAPI.headers.Authorization = token;
 
     router.push("/admin/dashboard");
@@ -28,13 +29,29 @@ export function useRegister() {
   const router = useRouter();
 
   return useMutation(async (data) => {
-    const { userData = {}, token = "" } = await postRegister(data);
+    const { userData = {}, token = "_" } = await postRegister(data);
 
-    // authStore.setCurrentUser(userData);
-    // authStore.setToken(token);
+    authStore.setCurrentUser(userData);
+    authStore.setToken(token);
 
+    // TODO: Waiting for back changes to enabled this
     // MyTurnAPI.headers.Authorization = token;
 
     router.push("/admin/dashboard");
   });
+}
+
+export function useLogOut() {
+  const queryClient = useQueryClient();
+  const authStore = useAuthStore();
+  const router = useRouter();
+
+  return () => {
+    authStore.setCurrentUser(null);
+    authStore.setToken(null);
+
+    queryClient.clear();
+
+    router.push("/");
+  };
 }

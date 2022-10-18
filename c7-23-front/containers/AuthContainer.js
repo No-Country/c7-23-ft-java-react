@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 import Lines from "../public/assets/images/lines.png";
 import Doctor from "../public/assets/images/doctor.png";
@@ -9,6 +9,7 @@ import HeartIcon from "../public/assets/icons/heartIcon.svg";
 import BackIcon from "../public/assets/icons/back.svg";
 
 export default function AuthContainer({ pageTitle = "", children, onSubmit }) {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -16,9 +17,9 @@ export default function AuthContainer({ pageTitle = "", children, onSubmit }) {
       </Head>
 
       <div className="absolute h-12 w-11 top-6 cursor-pointer">
-        <Link href="/">
+        <button onClick={() => router.back()}>
           <Image alt="back icon" layout="fill" src={BackIcon} />
-        </Link>
+        </button>
       </div>
       <div className="w-full h-screen grid md:grid-cols-2 items-center justify-items-center">
         <div className="w-full max-w-[300px]">

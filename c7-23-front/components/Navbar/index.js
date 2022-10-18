@@ -38,7 +38,7 @@ export default function Navbar() {
               <a href="#contact">Contact</a>
             </li>
             <li>
-              <a>Appointment</a>
+              <Link href="/register">Register</Link>
             </li>
             <li>
               <Link href="/login">Login</Link>
@@ -64,13 +64,14 @@ export default function Navbar() {
             <a href="#contact">Contact</a>
           </li>
           <li>
-            <button className="btn btn-primary rounded-xl">Appointment</button>
+            <Link href="/login">
+              <a className="btn btn-neutral rounded-xl">Login</a>
+            </Link>
           </li>
           <li>
-            <button className="btn btn-primary rounded-xl">
-              {" "}
-              <Link href="/login">Login</Link>
-            </button>
+            <Link href="/register">
+              <a className="btn btn-primary rounded-xl">Register</a>
+            </Link>
           </li>
         </ul>
       </div>

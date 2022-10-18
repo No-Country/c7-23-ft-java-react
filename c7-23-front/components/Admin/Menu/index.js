@@ -1,9 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useLogOut } from "../../../queries/authQueries";
 
 import ArrowLeftIcon from "../../../public/assets/icons/arrowLeftIcon.svg";
 
 export default function MenuBody({ menuList, user }) {
+  const logout = useLogOut();
+
   return (
     <div>
       <div className="h-12 flex justify-center items-center">
@@ -26,7 +29,9 @@ export default function MenuBody({ menuList, user }) {
       </ul>
       <div className="cursor-pointer absolute bottom-4 font-semibold text-gray-600 flex justify-center items-center w-full">
         <Image alt="back icon" layout="fixed" src={ArrowLeftIcon} />
-        <span>Log out</span>
+        <Link href="/" onClick={logout}>
+          Log out
+        </Link>
       </div>
     </div>
   );
