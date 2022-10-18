@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "../../forms/schemas/authSchemas";
@@ -29,7 +31,7 @@ export default function Login() {
   };
 
   return (
-    <AuthContainer onSubmit={handleSubmit(onSubmit)}>
+    <AuthContainer pageTitle="Login" onSubmit={handleSubmit(onSubmit)}>
       <Input
         label="Document"
         placeholder="document"
@@ -44,6 +46,12 @@ export default function Login() {
       >
         Login
       </button>
+      <p className="mt-3">
+        Don´t have an account?{" "}
+        <Link href="/register">
+          <a className="link link-primary"> Register</a>
+        </Link>
+      </p>
     </AuthContainer>
   );
 }
