@@ -19,7 +19,6 @@ export default function SelectInput({
       <div className="w-full relative">
         <select
           {...field}
-          defaultValue={name}
           name={name}
           className={cls("form-select rounded-xl w-full", !isError && "mb-3")}
           {...rest}
@@ -27,10 +26,10 @@ export default function SelectInput({
           <option value={name} disabled>
             {name}
           </option>
-          {options.map((items) => {
+          {options.map(({ value }) => {
             return (
-              <option key={items} value={items}>
-                {items}
+              <option key={value} value={value}>
+                {value}
               </option>
             );
           })}

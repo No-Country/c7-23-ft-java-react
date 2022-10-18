@@ -4,14 +4,13 @@ import { useRouter } from "next/router";
 import postLogin from "../api/postLogin";
 import postRegister from "../api/postRegister";
 
-import { MyTurnAPI } from "../config";
 import useAuthStore from "../store/authStore";
 
 export function useLogin() {
   const authStore = useAuthStore();
   const router = useRouter();
 
-  return useMutation(async (data) => {
+  const { mutate, isLoading } = useMutation(async (data) => {
     const { userData = {}, token = "_" } = await postLogin(data);
 
     authStore.setCurrentUser(userData);
@@ -22,13 +21,15 @@ export function useLogin() {
 
     router.push("/admin/dashboard");
   });
+
+  return { mutate, isLoading };
 }
 
 export function useRegister() {
   const authStore = useAuthStore();
   const router = useRouter();
 
-  return useMutation(async (data) => {
+  const { mutate, isLoading } = useMutation(async (data) => {
     const { userData = {}, token = "_" } = await postRegister(data);
 
     authStore.setCurrentUser(userData);
@@ -39,6 +40,7 @@ export function useRegister() {
 
     router.push("/admin/dashboard");
   });
+  return { mutate, isLoading };
 }
 
 export function useLogOut() {
