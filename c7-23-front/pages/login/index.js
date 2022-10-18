@@ -9,9 +9,10 @@ import { useLogin } from "../../queries/authQueries";
 import AuthContainer from "../../containers/AuthContainer";
 import PasswordInput from "../../forms/inputs/PasswordInput";
 import Input from "../../forms/inputs/Input";
+import SummitButton from "../../components/SummitButton.js";
 
 export default function Login() {
-  const { mutate: login } = useLogin();
+  const { mutate: login, isLoading } = useLogin();
 
   const {
     handleSubmit,
@@ -20,7 +21,7 @@ export default function Login() {
   } = useForm({
     resolver: yupResolver(loginSchema),
     defaultValues: {
-      document: "",
+      document: 0,
       password: "",
     },
     mode: "onChange",
@@ -33,21 +34,21 @@ export default function Login() {
   return (
     <AuthContainer pageTitle="Login" onSubmit={handleSubmit(onSubmit)}>
       <Input
+        type="number"
+        min="0"
         label="Document"
         placeholder="document"
         name="document"
         control={control}
       />
       <PasswordInput label="Password" name="password" control={control} />
-      <button
-        type="summit"
-        className="btn btn-primary rounded-xl w-full"
-        disabled={!isValid}
-      >
-        Login
-      </button>
+      <SummitButton
+        buttonName="Login"
+        isValid={isValid}
+        isLoading={isLoading}
+      />
       <p className="mt-3">
-        Don´t have an account?{" "}
+        Don´t have an account?
         <Link href="/register">
           <a className="link link-primary"> Register</a>
         </Link>

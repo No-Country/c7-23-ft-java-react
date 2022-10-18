@@ -12,3 +12,15 @@ export const MENULISTOFADMIN = [
     name: "Data Base",
   },
 ];
+
+const DOCUMENT_TYPES = {
+  DNI: "DNI",
+  LE: "LE",
+  LC: "LC",
+};
+
+export const DOCUMENT_TYPE_OPTIONS = [
+  { value: DOCUMENT_TYPES.LC },
+  { value: DOCUMENT_TYPES.DNI },
+  { value: DOCUMENT_TYPES.LE },
+];

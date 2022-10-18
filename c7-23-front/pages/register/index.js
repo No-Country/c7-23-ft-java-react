@@ -8,9 +8,11 @@ import AuthContainer from "../../containers/AuthContainer";
 import PasswordInput from "../../forms/inputs/PasswordInput";
 import Input from "../../forms/inputs/Input";
 import SelectInput from "../../forms/inputs/selectInput";
+import SummitButton from "../../components/SummitButton.js";
+import { DOCUMENT_TYPE_OPTIONS } from "../../shared/constants";
 
 export default function RegisterPage() {
-  const { mutate: register } = useRegister();
+  const { mutate: register, isLoading } = useRegister();
 
   const {
     handleSubmit,
@@ -21,8 +23,8 @@ export default function RegisterPage() {
     defaultValues: {
       name: "",
       lastName: "",
-      documentType: "",
-      document: "",
+      documentType: "DNI",
+      document: 0,
       email: "",
       password: "",
     },
@@ -45,10 +47,12 @@ export default function RegisterPage() {
       <SelectInput
         label="Document type"
         name="documentType"
-        options={["DNI", "LC", " LE"]}
+        options={DOCUMENT_TYPE_OPTIONS}
         control={control}
       />
       <Input
+        type="number"
+        min="0"
         label="Document"
         placeholder="Document"
         name="document"
@@ -62,13 +66,11 @@ export default function RegisterPage() {
         type="email"
       />
       <PasswordInput label="Password" name="password" control={control} />
-      <button
-        type="summit"
-        className="btn btn-primary rounded-xl w-full"
-        disabled={!isValid}
-      >
-        Register
-      </button>
+      <SummitButton
+        buttonName="Register"
+        isValid={isValid}
+        isLoading={isLoading}
+      />
     </AuthContainer>
   );
 }
