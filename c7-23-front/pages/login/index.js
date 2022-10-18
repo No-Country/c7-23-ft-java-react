@@ -10,9 +10,11 @@ import AuthContainer from "../../containers/AuthContainer";
 import PasswordInput from "../../forms/inputs/PasswordInput";
 import Input from "../../forms/inputs/Input";
 import SummitButton from "../../components/SummitButton.js";
+import Toast from "../../components/Toast";
+import { MENSSAGE_HTTP_ERROR } from "../../shared/constants";
 
 export default function Login() {
-  const { mutate: login, isLoading } = useLogin();
+  const { mutate: login, isLoading, codeHttp, isError } = useLogin();
 
   const {
     handleSubmit,
@@ -28,7 +30,7 @@ export default function Login() {
   });
 
   const onSubmit = (data) => {
-    login(data);
+    !isLoading && login(data);
   };
 
   return (
@@ -53,6 +55,17 @@ export default function Login() {
           <a className="link link-primary"> Register</a>
         </Link>
       </p>
+      {isError && (
+        <Toast
+          timeout={5000}
+          content={
+            codeHttp === 400
+              ? MENSSAGE_HTTP_ERROR[400]
+              : MENSSAGE_HTTP_ERROR.NetworkError
+          }
+          className="alert alert-warning"
+        />
+      )}
     </AuthContainer>
   );
 }
