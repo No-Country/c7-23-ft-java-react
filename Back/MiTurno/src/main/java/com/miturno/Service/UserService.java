@@ -32,8 +32,6 @@ public interface UserService {
 
     public void registerUser(User user) throws InvalidUserException;
 
-    public User validationUser(User user) throws InvalidUserException, NotFoundException, RequestCanceledException;
-    
     public void addRoleToUser(User user, Role role) throws NotFoundException;
 
     public UserResponse validationUser(LoginRequest user) throws InvalidUserException, NotFoundException, RequestCanceledException;

@@ -46,9 +46,7 @@ public class UserServiceImpl implements UserService{
     @Autowired
     Validation validation;
 
-    public UserServiceImpl( UserResponseMapper mapper) {
-        this.mapper = mapper;
-    }
+
 
 
     @Override
@@ -114,10 +112,7 @@ public class UserServiceImpl implements UserService{
         saveUser(user);
     }
 
-    @Override
-    public User validationUser(User user) throws InvalidUserException, NotFoundException, RequestCanceledException {
-        return null;
-    }
+
 
     @Override
     public UserResponse validationUser(LoginRequest user) throws InvalidUserException, NotFoundException, RequestCanceledException {
