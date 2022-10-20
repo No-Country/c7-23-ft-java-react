@@ -23,7 +23,7 @@ export default function Login() {
   } = useForm({
     resolver: yupResolver(loginSchema),
     defaultValues: {
-      document: 0,
+      document: "",
       password: "",
     },
     mode: "onChange",
@@ -36,8 +36,8 @@ export default function Login() {
   return (
     <AuthContainer pageTitle="Login" onSubmit={handleSubmit(onSubmit)}>
       <Input
-        type="number"
-        min="0"
+        type="text"
+        inputmode="numeric"
         label="Document"
         placeholder="document"
         name="document"

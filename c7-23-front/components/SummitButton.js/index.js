@@ -1,6 +1,12 @@
-export default function SummitButton({ isValid, buttonName = "", isLoading }) {
+export default function SummitButton({
+  isValid,
+  buttonName = "",
+  isLoading,
+  onClick,
+}) {
   return (
     <button
+      onClick={onClick}
       type="summit"
       className="btn btn-primary rounded-xl w-full"
       disabled={!isValid}

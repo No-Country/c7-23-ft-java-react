@@ -21,3 +21,14 @@ export const registerSchema = yup.object().shape({
   email: yup.string().email("Enter a valid email").required(REQUIRED_MESSAGE),
   password: yup.string().required(REQUIRED_MESSAGE),
 });
+
+export const editSchema = yup.object().shape({
+  name: yup.string(),
+  lastName: yup.string(),
+  documentType: yup.string(),
+  document: yup
+    .number("Enter a valid document number")
+    .typeError("Amount must be a number"),
+  email: yup.string().email("Enter a valid email"),
+  password: yup.string(),
+});

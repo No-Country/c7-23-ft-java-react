@@ -8,6 +8,7 @@ export default function Input({
   placeholder,
   type = "text",
   right = null,
+  className,
   ...rest
 }) {
   const { field, fieldState } = useController({ name, control });
@@ -15,23 +16,25 @@ export default function Input({
   const isError = fieldState.error && fieldState.isTouched;
 
   return (
-    <label>
-      {label}
-      <div className="w-full relative">
-        <input
-          {...field}
-          type={type}
-          placeholder={placeholder}
-          className={cls("form-input", !isError && "mb-3")}
-          {...rest}
-        />
-        {right}
-      </div>
-      {isError && (
-        <div className="mb-3">
-          <span className="text-error">{fieldState.error?.message}</span>
+    <div className={className}>
+      <label>
+        {label}
+        <div className="w-full relative flex">
+          <input
+            {...field}
+            type={type}
+            placeholder={placeholder}
+            className={cls("form-input ", !isError && "mb-3")}
+            {...rest}
+          />
+          {right}
         </div>
-      )}
-    </label>
+        {isError && (
+          <div className="mb-3">
+            <span className="text-error">{fieldState.error?.message}</span>
+          </div>
+        )}
+      </label>
+    </div>
   );
 }
