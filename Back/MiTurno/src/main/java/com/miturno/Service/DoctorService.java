@@ -14,7 +14,7 @@ public interface DoctorService {
 
     public List<DoctorResponse> getDoctors() throws NotFoundException;
 
-    public Doctor getDoctor(Long id) throws NotFoundException;
+    public DoctorResponse getDoctor(Long id) throws NotFoundException;
 
     public void saveDoctor(Doctor doctor) throws InvalidDoctorException;
 

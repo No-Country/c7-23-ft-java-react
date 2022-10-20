@@ -36,7 +36,7 @@ public class DoctorController {
 
     @GetMapping("/doctor")
     @ResponseBody
-    public Doctor getDoctor(Long id) throws NotFoundException{
+    public DoctorResponse getDoctor(Long id) throws NotFoundException{
         return docServ.getDoctor(id);
     }
 
@@ -51,7 +51,7 @@ public class DoctorController {
     }
     
     @PatchMapping("/doctor/update")
-    public void updateDoctor(@RequestBody Doctor doctor, @RequestParam Long id) throws InvalidDoctorException{
+    public void updateDoctor(@RequestBody Doctor doctor, @RequestParam Long id) throws InvalidDoctorException, InvalidUserException {
         doctor.setId(id);
         docServ.updateDoctor(doctor);
     }

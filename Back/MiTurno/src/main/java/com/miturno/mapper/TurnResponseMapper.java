@@ -12,7 +12,7 @@ import org.mapstruct.Mappings;
 public interface TurnResponseMapper {
     @Mappings({
 
-            @Mapping(target = "idTurn", source = "id"), //Invertir?
+            @Mapping(target = "idTurn", source = "id"),
             @Mapping(target = "idDoctor", source = "doctor.id"),
             @Mapping(target = "idPatient", source = "patient.id")
     })

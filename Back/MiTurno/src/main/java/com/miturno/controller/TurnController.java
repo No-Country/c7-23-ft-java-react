@@ -13,6 +13,7 @@ import com.miturno.models.Turn;
 import java.util.List;
 
 import com.miturno.models.dto.TurnResponse;
+import com.miturno.repositories.DoctorRepository;
 import com.miturno.repositories.TurnRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,6 +43,8 @@ public class TurnController {
 
     @Autowired
     private TurnRepository turnRepo;
+
+    private DoctorRepository doctorRepo;
     
     @GetMapping("/turns")
     @ResponseBody
@@ -62,7 +65,7 @@ public class TurnController {
   
     @PostMapping("/calendar")
     public void saveCalendar(@RequestParam Long id, @RequestParam int year, @RequestParam int month) throws NotFoundException, InvalidDoctorException{
-        Doctor doc = docServ.getDoctor(id);
+        Doctor doc = doctorRepo.getReferenceById(id);
         turnServ.flushTurns(doc, month, year);
     }
     

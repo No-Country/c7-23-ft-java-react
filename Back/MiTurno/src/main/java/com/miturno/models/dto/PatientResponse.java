@@ -10,7 +10,7 @@ public class PatientResponse {
 
     private Long idPatient;
     private String name;
-    private String last_name;
+    private String lastName;
     private DocumentType documentType;
     private Long document;
     private String phone;

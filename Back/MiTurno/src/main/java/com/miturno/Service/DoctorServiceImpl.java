@@ -59,8 +59,16 @@ public class DoctorServiceImpl implements DoctorService{
     }
 
     @Override
-    public Doctor getDoctor(Long id) throws NotFoundException {
-        return docRepo.findById(id).orElse(null);
+    public DoctorResponse getDoctor(Long id) throws NotFoundException {
+        Optional<Doctor> response = docRepo.findById(id);
+
+        if (response.isPresent()){
+            DoctorResponse doctorResponse = mapper.doctorToDoctorResponse(response.get());
+            return doctorResponse;
+        }else {
+            DoctorResponse doctorResponse = mapper.doctorToDoctorResponse(response.get());
+            return doctorResponse;
+        }
     }
 
     @Override

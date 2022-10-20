@@ -14,7 +14,7 @@ public interface PatientResponseMapper {
 
     @Mappings({
 
-            @Mapping(target = "idPatient", source = "id") //Invertir?
+            //@Mapping(target = "idPatient", source = "id") //Invertir?
 
             //@Mapping(target = "idTurns", source = "turns.id"),
     })
