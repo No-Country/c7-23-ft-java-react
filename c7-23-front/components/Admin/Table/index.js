@@ -1,9 +1,14 @@
 import { flexRender } from "@tanstack/react-table";
 import DropDown from "../../DropDown";
+import { LIST_OF_DROPDOWN_ACTIONS } from "../../../shared/constants/dropDownActions";
 
-export default function Table({ table }) {
+export default function Table({
+  table,
+  dropDownActions = LIST_OF_DROPDOWN_ACTIONS,
+  onDropdownSelect,
+}) {
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto w-auto">
       <table className="table w-full rounded-lg  border-spacing-y-4 border-separate">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -33,7 +38,15 @@ export default function Table({ table }) {
                 </td>
               ))}
               <td className="rounded-r-lg">
-                <DropDown options={["Edit", "Delete"]} />
+                <DropDown
+                  dropDownItems={dropDownActions.map((action, index) => ({
+                    id: index,
+                    name: action,
+                    value: action.toLowerCase(),
+                    rowID: table,
+                  }))}
+                  onSelect={(action) => onDropdownSelect(action, row)}
+                />
               </td>
             </tr>
           ))}

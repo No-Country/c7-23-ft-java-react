@@ -27,8 +27,8 @@ export default function MenuMobile({ menuList, user }) {
 
       <input type="checkbox" id="my-modal-3" className=" modal-toggle " />
 
-      <div className="modal">
-        <div className="modal-box relative p-0 w-full h-full min-h-screen">
+      <div className="modal  bg-white">
+        <div className="relative h-full w-full ">
           <label
             htmlFor="my-modal-3"
             className="btn btn-sm btn-circle absolute right-2 top-2"

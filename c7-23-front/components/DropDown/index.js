@@ -1,6 +1,6 @@
-export default function DropDown({ options = [] }) {
+export default function DropDown({ dropDownItems = [], onSelect }) {
   return (
-    <div className="dropdown dropdown-left cursor-pointer">
+    <div className="z-10 dropdown dropdown-left cursor-pointer">
       <div
         tabIndex={0}
         className="h-5 w-6 m-1 flex justify-around items-center"
@@ -13,10 +13,12 @@ export default function DropDown({ options = [] }) {
         tabIndex={0}
         className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
       >
-        {options.map((optName) => {
+        {dropDownItems.map((item) => {
           return (
-            <li key={optName}>
-              <a>{optName}</a>
+            <li key={item.id}>
+              <a value={item.value} onClick={() => onSelect(item)}>
+                {item.name}
+              </a>
             </li>
           );
         })}

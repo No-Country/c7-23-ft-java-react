@@ -8,8 +8,8 @@ export const MENULISTOFADMIN = [
     name: "Appointments",
   },
   {
-    url: "/admin/dataBase",
-    name: "Data Base",
+    url: "/admin/userData",
+    name: "User Data",
   },
 ];
 
