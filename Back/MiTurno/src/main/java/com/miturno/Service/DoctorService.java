@@ -20,7 +20,7 @@ public interface DoctorService {
 
     public void deleteDoctor(Long id) throws NotFoundException;
 
-    public void updateDoctor(Doctor doctor) throws InvalidDoctorException;
+    public void updateDoctor(Doctor doctor) throws InvalidDoctorException, InvalidUserException;
 
     public void registerDoctor(Doctor Doctor, ArrayList<Integer> days) throws InvalidDoctorException, InvalidUserException;
 

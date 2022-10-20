@@ -64,7 +64,7 @@ public class UserController {
     }
 
     @PatchMapping("/user/update")
-    public void updateUser(@Valid @RequestBody User user, @RequestParam Long id) throws InvalidUserException {
+    public void updateUser(@RequestBody User user, @RequestParam Long id) throws InvalidUserException {
                 userServ.updateUser(user, id);
     }
 

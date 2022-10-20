@@ -75,8 +75,48 @@ public class DoctorServiceImpl implements DoctorService{
     }
 
     @Override
-    public void updateDoctor(Doctor doctor) throws InvalidDoctorException {
-        docRepo.save(doctor);
+    public void updateDoctor(Doctor user) throws InvalidDoctorException, InvalidUserException {
+        if (user.getPassword() == null || user.getPassword().isEmpty()){
+            user.setPassword(docRepo.findById(user.getId()).get().getPassword());
+        }else {
+
+            if(!user.getPassword().equals(docRepo.findById(user.getId()).get().getPassword())){
+                user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            }
+        }
+
+        if (user.getDocumentType() == null){
+            user.setDocumentType(docRepo.findById(user.getId()).get().getDocumentType());
+        }
+
+        if (user.getName() == null || user.getName().isEmpty()){
+            user.setName(docRepo.findById(user.getId()).get().getName());
+        }
+        if ((user.getLastName() == null || user.getLastName().isEmpty())){
+            user.setLastName(docRepo.findById(user.getId()).get().getLastName());
+        }
+        if (user.getDocument() == null){
+            user.setDocument(docRepo.findById(user.getId()).get().getDocument());
+        }else {
+            validation.validationDocument(user.getDocument());
+        }
+        if (user.getEmail() == null || user.getEmail().isEmpty()){
+            user.setEmail(docRepo.findById(user.getId()).get().getEmail());
+        }else{
+            validation.validationEmail(user.getEmail());
+        }
+        if (user.getSpecialties() == null || user.getSpecialties().isEmpty()){
+            user.setSpecialties(docRepo.findById(user.getId()).get().getSpecialties());
+        }
+        if (user.getAttentionDays() == null || user.getAttentionDays().isEmpty()){
+            user.setAttentionDays(docRepo.findById(user.getId()).get().getAttentionDays());
+        }
+        if (user.getTurns() == null || user.getTurns().isEmpty()){
+            user.setTurns(docRepo.findById(user.getId()).get().getTurns());
+        }
+        user.setId(user.getId());
+
+        docRepo.save(user);
     }
 
     @Override

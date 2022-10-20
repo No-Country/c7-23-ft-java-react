@@ -89,14 +89,41 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void updateUser(@Valid User user, @RequestParam Long id) throws InvalidUserException {
+    public void updateUser(User user, Long id) throws InvalidUserException {
 
+        if (user.getPassword() == null || user.getPassword().isEmpty()){
+            user.setPassword(userRepo.findById(id).get().getPassword());
+        }else {
 
-        if(!user.getPassword().equals(userRepo.findById(id).get().getPassword())){
-            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            if(!user.getPassword().equals(userRepo.findById(id).get().getPassword())){
+                user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            }
         }
 
+        if (user.getDocumentType() == null){
+            user.setDocumentType(userRepo.findById(id).get().getDocumentType());
+        }
+
+        if (user.getName() == null || user.getName().isEmpty()){
+            user.setName(userRepo.findById(id).get().getName());
+        }
+        if ((user.getLastName() == null || user.getLastName().isEmpty())){
+            user.setLastName(userRepo.findById(id).get().getLastName());
+        }
+        if (user.getDocument() == null){
+            user.setDocument(userRepo.findById(id).get().getDocument());
+        }else {
+            validation.validationDocument(user.getDocument());
+        }
+        if (user.getEmail() == null || user.getEmail().isEmpty()){
+            user.setEmail(userRepo.findById(id).get().getEmail());
+        }else{
+            validation.validationEmail(user.getEmail());
+        }
+
+
         user.setId(id);
+
         userRepo.save(user);
 
     }

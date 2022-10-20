@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Service
@@ -16,13 +17,13 @@ public class Validation {
     @Autowired
     private UserRepository userRepo;
 
-    public void validationEmail(String email) throws InvalidUserException {
+    public void validationEmail(@Valid String email) throws InvalidUserException {
         Optional<User> response = Optional.ofNullable(userRepo.findByEmail(email));
         if (response.isPresent()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The email already exist");
         }
     }
-    public void validationDocument(Long document) throws InvalidUserException {
+    public void validationDocument(@Valid Long document) throws InvalidUserException {
         Optional<User> response = Optional.ofNullable(userRepo.findByDocument(document));
         if (response.isPresent()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The document already exist");
