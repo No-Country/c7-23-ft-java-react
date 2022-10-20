@@ -26,7 +26,7 @@ export default function RegisterPage() {
       name: "",
       lastName: "",
       documentType: "DNI",
-      document: 0,
+      document: "",
       email: "",
       password: "",
     },
@@ -53,8 +53,8 @@ export default function RegisterPage() {
         control={control}
       />
       <Input
-        type="number"
-        min="0"
+        type="text"
+        inputmode="numeric"
         label="Document"
         placeholder="Document"
         name="document"

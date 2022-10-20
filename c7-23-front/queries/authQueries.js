@@ -21,7 +21,6 @@ export function useLogin() {
     router.push("/admin/dashboard");
   });
   const codeHttp = error?.response?.status;
-  console.log("mensaje", error?.response?.status);
   return { mutate, isLoading, isError, codeHttp };
 }
 
@@ -39,6 +38,14 @@ export function useRegister() {
     // MyTurnAPI.headers.Authorization = token;
 
     router.push("/admin/dashboard");
+  });
+  const codeHttp = error?.response?.status;
+  return { mutate, isLoading, isError, codeHttp };
+}
+
+export function useNewUser() {
+  const { mutate, isLoading, isError, error } = useMutation(async (data) => {
+    await postRegister(data);
   });
   const codeHttp = error?.response?.status;
   return { mutate, isLoading, isError, codeHttp };

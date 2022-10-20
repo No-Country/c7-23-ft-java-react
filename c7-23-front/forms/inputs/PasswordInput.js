@@ -6,7 +6,7 @@ import ControlledInput from "./Input";
 import eyeOpen from "../../public/assets/icons/eyeOpen.svg";
 import eyeClosed from "../../public/assets/icons/eyeClosed.svg";
 
-export default function PasswordInput(props) {
+export default function PasswordInput({ className, ...props }) {
   const [type, setType] = useState("password");
 
   const showPassword = useCallback(() => {
@@ -20,6 +20,7 @@ export default function PasswordInput(props) {
 
   return (
     <ControlledInput
+      className={className}
       {...props}
       type={type}
       placeholder="*********"

@@ -8,14 +8,12 @@ import SearchInput from "../../../components/SeachInput";
 import withAuthPage from "../../../hocs/withAuthPage";
 
 import getUserData from "../../../api/getUserData";
-import useGetUserData from "../../../queries";
+import { useGetUserData } from "../../../queries";
 import {
   createColumnHelper,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
-import AddIcon from "../../../public/assets/icons/addIcon.svg";
 
 const columnHelper = createColumnHelper();
 
@@ -24,13 +22,17 @@ function AppointmentsPage({ users }) {
 
   const columns = useMemo(
     () => [
-      columnHelper.accessor("first_name", {
+      columnHelper.accessor("id", {
+        header: () => "id",
+        footer: (info) => info.column.id,
+      }),
+      columnHelper.accessor("name", {
         id: "first name",
         header: () => "First name",
         cell: (info) => info.getValue(),
         footer: (info) => info.column.id,
       }),
-      columnHelper.accessor("last_name", {
+      columnHelper.accessor("lastName", {
         id: "last name",
         cell: (info) => info.getValue(),
         header: () => <span>Last Name</span>,
@@ -41,8 +43,12 @@ function AppointmentsPage({ users }) {
         cell: (info) => info.renderValue(),
         footer: (info) => info.column.id,
       }),
-      columnHelper.accessor("id", {
-        header: () => <span>Id</span>,
+      columnHelper.accessor("documentType", {
+        header: () => "documentType",
+        footer: (info) => info.column.id,
+      }),
+      columnHelper.accessor("document", {
+        header: () => "document",
         footer: (info) => info.column.id,
       }),
     ],
@@ -55,33 +61,8 @@ function AppointmentsPage({ users }) {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  // table.getAllColumns()[0].setFilterValue()
-
   return (
-    <Layout>
-      <div className="flex justify-center md:justify-between">
-        <p className="font-medium text-center text-2xl">Appoiments</p>
-        <div className="fixed z-10 bottom-2 right-2 md:static">
-          <label
-            htmlFor="my-modal-2"
-            className="btn btn-primary rounded-xl flex items-center justify-center"
-          >
-            <div className="h-7 w-7 relative mr-2">
-              <Image alt="add an appoiment" layout="fill" src={AddIcon} />
-            </div>
-            Appoiment
-          </label>
-        </div>
-      </div>
-      <div className="tabs justify-center md:justify-start">
-        <button className="tab tab-bordered focus:text-neutral">
-          Appoiments
-        </button>
-        <button className="tab tab-bordered focus:text-neutral">
-          Pending Appoiments
-        </button>
-      </div>
-      <SearchInput />
+    <Layout pageTitle="Appointments" buttonName="Appointments">
       <div>
         <Table table={table} />
       </div>
@@ -135,7 +116,7 @@ function AppointmentsPage({ users }) {
   );
 }
 
-export default withAuthPage(AppointmentsPage)
+export default withAuthPage(AppointmentsPage);
 
 export async function getServerSideProps() {
   const users = await getUserData();
