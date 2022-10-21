@@ -17,5 +17,5 @@ public class PatientResponse {
     private String email;
     private String social_work;
     private String clinic_history;
-    private List<Turn> turns;
+   // private List<Turn> turns;
 }

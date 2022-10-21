@@ -44,7 +44,7 @@ public class Patient implements Serializable {
     private String name;
 
     @Column(length= 30, nullable=false)
-    private String last_name;
+    private String lastName;
     
     @Enumerated(value = EnumType.STRING)
     private DocumentType documentType;

@@ -7,9 +7,11 @@ import com.miturno.Service.TurnService;
 import com.miturno.exceptions.InvalidDoctorException;
 import com.miturno.exceptions.InvalidTurnException;
 import com.miturno.exceptions.NotFoundException;
+import com.miturno.mapper.PatientResponseMapper;
 import com.miturno.models.Doctor;
 import com.miturno.models.Patient;
 import com.miturno.models.Turn;
+import com.miturno.models.dto.PatientResponse;
 import java.util.List;
 
 import com.miturno.models.dto.TurnResponse;
@@ -43,8 +45,12 @@ public class TurnController {
 
     @Autowired
     private TurnRepository turnRepo;
-
+    
+    @Autowired
     private DoctorRepository doctorRepo;
+    
+    @Autowired
+    private PatientResponseMapper patMap;
     
     @GetMapping("/turns")
     @ResponseBody
@@ -75,8 +81,8 @@ public class TurnController {
     }
     
     @PatchMapping("/turn/update")
-    public void updateTurn(@RequestBody Turn turn, @RequestParam Long id) throws InvalidTurnException{
-        turn.setId(id);
+    public void updateTurn(@RequestBody TurnResponse turn, @RequestParam Long id) throws InvalidTurnException{
+        turn.setIdTurn(id);
         turnServ.updateTurn(turn);
     }
     
@@ -88,7 +94,8 @@ public class TurnController {
     
     @PostMapping("/turn/addpatient")
     public void addPatientToTurn(@RequestParam Long turn_id, @RequestParam Long patient_id) throws NotFoundException {
-        Patient patient = patServ.getPatient(patient_id);
+        PatientResponse patientResponse = patServ.getPatient(patient_id);
+        Patient patient = patMap.patientResponseToPatient(patientResponse);
         Turn turn = turnRepo.getReferenceById(turn_id);
         turnServ.addPatientToTurn(patient, turn);       
     }

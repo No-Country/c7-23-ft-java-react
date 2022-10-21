@@ -74,8 +74,9 @@ public class TurnServiceImpl implements TurnService{
     }
 
     @Override
-    public void updateTurn(Turn turn) throws InvalidTurnException {
-        turnRepo.save(turn);
+    public void updateTurn(TurnResponse turn) throws InvalidTurnException {
+        Turn turno = mapper.TurnResponseToTurn(turn);
+        turnRepo.save(turno);
     }
 
     @Override

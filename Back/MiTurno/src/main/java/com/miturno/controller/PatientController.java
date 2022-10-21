@@ -35,7 +35,7 @@ public class PatientController {
 
     @GetMapping("/patient")
     @ResponseBody
-    public Patient getPatient(@RequestParam Long id) throws NotFoundException{
+    public PatientResponse getPatient(@RequestParam Long id) throws NotFoundException{
         return patServ.getPatient(id);
     }
     

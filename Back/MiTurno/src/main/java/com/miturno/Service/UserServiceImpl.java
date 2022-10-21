@@ -94,8 +94,10 @@ public class UserServiceImpl implements UserService{
         if (user.getPassword() == null || user.getPassword().isEmpty()){
             user.setPassword(userRepo.findById(id).get().getPassword());
         }else {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//            if(!user.getPassword().equals(userRepo.findById(id).get().getPassword())){
+            if(!encoder.matches(user.getPassword(), userRepo.findById(id).get().getPassword())){
 
-            if(!user.getPassword().equals(userRepo.findById(id).get().getPassword())){
                 user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
             }
         }

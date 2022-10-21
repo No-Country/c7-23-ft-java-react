@@ -25,7 +25,7 @@ public interface TurnService {
     
     public void deleteTurn(Long id) throws NotFoundException;
     
-    public void updateTurn(Turn turn) throws InvalidTurnException;
+    public void updateTurn(TurnResponse turn) throws InvalidTurnException;
     
     public void lockTurn(Turn turn) throws InvalidTurnException;
     

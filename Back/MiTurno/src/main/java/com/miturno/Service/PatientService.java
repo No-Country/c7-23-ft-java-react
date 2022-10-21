@@ -12,7 +12,7 @@ public interface PatientService {
 
     public List<PatientResponse> getPatients() throws NotFoundException;
 
-    public Patient getPatient(Long id) throws NotFoundException;
+    public PatientResponse getPatient(Long id) throws NotFoundException;
     
     public Patient getPatientByDocument(Long document) throws NotFoundException;
     

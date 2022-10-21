@@ -42,8 +42,10 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public Patient getPatient(Long id) throws NotFoundException {
-        return patientRepo.findById(id).orElse(null);
+    public PatientResponse getPatient(Long id) throws NotFoundException {
+        Patient pat = patientRepo.findById(id).orElse(null);
+        PatientResponse patient = mapper.patientToPatientResponse(pat);
+        return patient;
     }
 
     @Override
