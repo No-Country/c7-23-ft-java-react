@@ -1,42 +1,46 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useNewUser } from "../queries";
-import { registerSchema } from "../forms/schemas/authSchemas";
+import Modal from "components/Modal.js/index.js";
+import Toast from "components/Toast";
 
-import Modal from "../components/Modal.js/index.js";
-import PasswordInput from "../forms/inputs/PasswordInput";
-import Input from "../forms/inputs/Input";
-import SelectInput from "../forms/inputs/selectInput";
-import SummitButton from "../components/SummitButton.js";
-import { DOCUMENT_TYPE_OPTIONS } from "../shared/constants";
-import Toast from "../components/Toast";
-import { MENSSAGE_HTTP_ERROR } from "../shared/constants";
+import Input from "forms/inputs/Input";
+import SelectInput from "forms/inputs/selectInput";
+import SummitButton from "components/SummitButton.js";
 
-export default function NewUserModal({ showModal, setShowModal, refetch }) {
-  const { mutate: register, isLoading, codeHttp, isError } = useNewUser();
+import { DOCUMENT_TYPE_OPTIONS } from "shared/constants";
+import { MENSSAGE_HTTP_ERROR } from "shared/constants";
+
+import { useNewPatient } from "queries/patientsQueries";
+
+import { registerPatientSchema } from "forms/schemas/patientSchema";
+import Checkbox from "forms/inputs/Checkbox";
+
+export default function NewPatientModal({ showModal, setShowModal }) {
+  const { mutate: registNewPatient, isLoading, isError } = useNewPatient();
+
   const {
     handleSubmit,
     control,
     formState: { isValid },
   } = useForm({
-    resolver: yupResolver(registerSchema),
+    resolver: yupResolver(registerPatientSchema),
     defaultValues: {
       name: "",
       lastName: "",
       documentType: "DNI",
       document: "",
       email: "",
-      password: "",
+      phone: "",
+      particular: false,
+      socialWork: "OSDE",
+      clinicHistory: "",
     },
     mode: "onChange",
   });
 
   const onSubmit = (data) => {
-    register(data, {
-      onSuccess: () => {
-        refetch();
-      },
+    registNewPatient(data, {
       onSettled: () => {
         setShowModal(false);
       },
@@ -45,7 +49,7 @@ export default function NewUserModal({ showModal, setShowModal, refetch }) {
 
   return (
     <Modal
-      title="New user"
+      title="Edit patient"
       showModal={showModal}
       setShowModal={setShowModal}
       showClose={!isLoading}
@@ -79,7 +83,26 @@ export default function NewUserModal({ showModal, setShowModal, refetch }) {
           control={control}
           type="email"
         />
-        <PasswordInput label="Password" name="password" control={control} />
+        <Input
+          label="Phone"
+          placeholder="phone"
+          name="phone"
+          control={control}
+          type="tel"
+        />
+        <Checkbox label="Particular" name="particular" control={control} />
+        <SelectInput
+          label="Social work"
+          name="socialWork"
+          options={[{ value: "OSDE" }]}
+          control={control}
+        />
+        <Input
+          label="Clinic history"
+          placeholder="clinic history"
+          name="clinicHistory"
+          control={control}
+        />
         <SummitButton
           buttonName="Register"
           isValid={isValid}
@@ -88,11 +111,7 @@ export default function NewUserModal({ showModal, setShowModal, refetch }) {
         {isError && (
           <Toast
             timeout={5000}
-            content={
-              codeHttp === 400
-                ? MENSSAGE_HTTP_ERROR[400]
-                : MENSSAGE_HTTP_ERROR.NetworkError
-            }
+            content={MENSSAGE_HTTP_ERROR.NetworkError}
             className="alert alert-warning"
           />
         )}

@@ -37,7 +37,7 @@ export default function Login() {
     <AuthContainer pageTitle="Login" onSubmit={handleSubmit(onSubmit)}>
       <Input
         type="text"
-        inputmode="numeric"
+        inputMode="numeric"
         label="Document"
         placeholder="document"
         name="document"
