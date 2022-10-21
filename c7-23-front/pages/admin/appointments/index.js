@@ -27,7 +27,8 @@ function AppointmentsPage() {
   const [showModalEdit, setShowModalEdit] = useState(false);
   const [showModalNewUser, setShowModalNewUser] = useState(false);
   const [idUser, setIdUser] = useState(null);
-  const [section, setSection] = useState(APPOINTMENTS_SECTION.Patients);
+  const [section, setSection] = useState(APPOINTMENTS_SECTION.Doctors);
+  const [selectedUser, setSelectedUser] = useState(null);
 
   const [globalFilter, setGlobalFilter] = useState("");
 
@@ -54,7 +55,9 @@ function AppointmentsPage() {
 
   const handledDropDownSelect = (action, row) => {
     const { id } = row.original;
-    console.log(row.original);
+
+    setSelectedUser(row.original);
+
     if (action.value === DROPDOWN_ACTIONS.DELETE) {
       setIdUser(id);
       setShowModalDelete(true);
@@ -62,6 +65,11 @@ function AppointmentsPage() {
     }
 
     if (action.value === DROPDOWN_ACTIONS.EDIT) {
+      setShowModalDelete(false);
+      setIdUser(id);
+      setShowModalEdit(true);
+    }
+    if (action.value === DROPDOWN_ACTIONS.ASSIGN) {
       setShowModalDelete(false);
       setIdUser(id);
       setShowModalEdit(true);
@@ -83,11 +91,12 @@ function AppointmentsPage() {
     searchUserFilter,
     globalFilter,
     setGlobalFilter,
+    selectedUser,
   };
 
   const SECTIONS = {
-    [APPOINTMENTS_SECTION.Patients]: Patients,
     [APPOINTMENTS_SECTION.Doctors]: Doctors,
+    [APPOINTMENTS_SECTION.Patients]: Patients,
     [APPOINTMENTS_SECTION.Turns_available]: TurnsAvailable,
     [APPOINTMENTS_SECTION.Turns_booked]: TurnsBooked,
   };
@@ -107,29 +116,29 @@ function AppointmentsPage() {
 
 export default withAuthPage(AppointmentsPage);
 
-export async function getStaticProps() {
-  try {
-    const queryClient = new QueryClient();
+// export async function getStaticProps() {
+//   try {
+//     const queryClient = new QueryClient();
 
-    const PREFETCH_QUERIES = [
-      ["patients", getPatients],
-      ["doctors", getDoctors],
-      ["turns", getTurns],
-    ];
+//     const PREFETCH_QUERIES = [
+//       ["patients", getPatients],
+//       ["doctors", getDoctors],
+//       ["turns", getTurns],
+//     ];
 
-    await Promise.all(
-      PREFETCH_QUERIES.map(([key, fetcher]) =>
-        queryClient.prefetchQuery([key], fetcher)
-      )
-    );
+//     await Promise.all(
+//       PREFETCH_QUERIES.map(([key, fetcher]) =>
+//         queryClient.prefetchQuery([key], fetcher)
+//       )
+//     );
 
-    return {
-      props: {
-        dehydratedState: dehydrate(queryClient),
-      },
-    };
-  } catch (err) {
-    console.error(err);
-    return {};
-  }
-}
+//     return {
+//       props: {
+//         dehydratedState: dehydrate(queryClient),
+//       },
+//     };
+//   } catch (err) {
+//     console.error(err);
+//     return {};
+//   }
+// }

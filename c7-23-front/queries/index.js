@@ -15,6 +15,7 @@ import patchTurn from "../api/patchTurn";
 import patchPatient from "../api/patchPatient";
 import getDoctorById from "../api/getDoctorById";
 import getPatientById from "../api/getPatientById";
+import postTurnToPatient from "api/postTurnToPatient";
 
 // get
 
@@ -71,20 +72,26 @@ export function useGetPatientById(id) {
 // Delete
 
 export function useDelete() {
+  const queryClient = useQueryClient();
   const { mutate, isError, isSuccess, isLoading } = useMutation(async (id) => {
+    await queryClient.invalidateQueries(["users"]);
     return await deleteUser(id);
   });
   return { mutate, isError, isSuccess, isLoading };
 }
 export function useDeleteDoctor() {
+  const queryClient = useQueryClient();
   const { mutate, isError, isSuccess, isLoading } = useMutation(async (id) => {
+    await queryClient.invalidateQueries(["doctors"]);
     return await deleteDoctor(id);
   });
   return { mutate, isError, isSuccess, isLoading };
 }
 
 export function useDeletePatient() {
+  const queryClient = useQueryClient();
   const { mutate, isError, isSuccess, isLoading } = useMutation(async (id) => {
+    await queryClient.invalidateQueries(["patients"]);
     return await deletePatient(id);
   });
   return { mutate, isError, isSuccess, isLoading };
@@ -93,7 +100,9 @@ export function useDeletePatient() {
 // New users
 
 export function useNewDoctor() {
+  const queryClient = useQueryClient();
   const { mutate, isLoading, isError, error } = useMutation(async (data) => {
+    await queryClient.invalidateQueries(["doctors"]);
     await postRegisterDoctor(data);
   });
   const codeHttp = error?.response?.status;
@@ -109,8 +118,20 @@ export function useNewDoctor() {
 // }
 
 export function useNewUser() {
+  const queryClient = useQueryClient();
   const { mutate, isLoading, isError, error } = useMutation(async (data) => {
+    await queryClient.invalidateQueries(["users"]);
     await postRegister(data);
+  });
+  const codeHttp = error?.response?.status;
+  return { mutate, isLoading, isError, codeHttp };
+}
+
+export function usePosturn() {
+  const queryClient = useQueryClient();
+  const { mutate, isLoading, isError, error } = useMutation(async (data) => {
+    await postTurnToPatient(data);
+    await queryClient.invalidateQueries(["turns"]);
   });
   const codeHttp = error?.response?.status;
   return { mutate, isLoading, isError, codeHttp };
@@ -131,14 +152,18 @@ export function useEditUser() {
 }
 
 export function usePacthDoctor() {
+  const queryClient = useQueryClient();
   const { mutate, isError, isSuccess, isLoading } = useMutation(async (id) => {
+    await queryClient.invalidateQueries(["doctors"]);
     return await patchDoctor(id);
   });
   return { mutate, isError, isSuccess, isLoading };
 }
 
 export function usePacthTurn() {
+  const queryClient = useQueryClient();
   const { mutate, isError, isSuccess, isLoading } = useMutation(async (id) => {
+    await queryClient.invalidateQueries(["turns"]);
     return await patchTurn(id);
   });
   return { mutate, isError, isSuccess, isLoading };

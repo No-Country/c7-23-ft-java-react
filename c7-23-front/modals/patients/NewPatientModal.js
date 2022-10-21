@@ -14,7 +14,7 @@ import { MENSSAGE_HTTP_ERROR } from "shared/constants";
 import { useNewPatient } from "queries/patientsQueries";
 
 import { registerPatientSchema } from "forms/schemas/patientSchema";
-import Checkbox from "forms/inputs/Checkbox";
+import Toggle from "forms/inputs/Toggle";
 
 export default function NewPatientModal({ showModal, setShowModal }) {
   const { mutate: registNewPatient, isLoading, isError } = useNewPatient();
@@ -40,7 +40,18 @@ export default function NewPatientModal({ showModal, setShowModal }) {
   });
 
   const onSubmit = (data) => {
-    registNewPatient(data, {
+    const body = {
+      name: data.name,
+      lastName: data.lastName,
+      documentTipe: data.documentType,
+      document: data.document,
+      email: data.email,
+      phone: data.phone,
+      particular: data.particular,
+      social_work: data.socialWork,
+      clinic_history: data.clinicHistory,
+    };
+    registNewPatient(body, {
       onSettled: () => {
         setShowModal(false);
       },
@@ -90,7 +101,7 @@ export default function NewPatientModal({ showModal, setShowModal }) {
           control={control}
           type="tel"
         />
-        <Checkbox label="Particular" name="particular" control={control} />
+        <Toggle label="Particular" name="particular" control={control} />
         <SelectInput
           label="Social work"
           name="socialWork"

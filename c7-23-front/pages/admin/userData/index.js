@@ -39,7 +39,6 @@ function UserData() {
   const [selectedUser, setSelectedUser] = useState(null);
 
   const { data, refetch } = useGetUserData();
-  console.log("selectedUser", selectedUser);
   const searchUserFilter = (row, columnId, value, addMeta) => {
     const itemRank = rankItem(row.getValue(columnId), value);
     addMeta({ itemRank });
@@ -188,7 +187,7 @@ export async function getStaticProps() {
       },
     };
   } catch (err) {
-    // console.error(err);
+    console.error(err);
     return {};
   }
 }

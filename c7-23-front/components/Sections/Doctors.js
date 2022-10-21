@@ -16,7 +16,7 @@ import { useGetDoctors } from "../../queries";
 import NewDoctorModal from "modals/doctors/NewDoctorModal";
 
 export default function Doctors({
-  idUser,
+  selectedUser,
   showModalNewUser,
   setShowModalNewUser,
   showModalEdit,
@@ -82,24 +82,27 @@ export default function Doctors({
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
+
+  console.log("dssd");
   return (
     <div>
       <DeleteDoctorModal
-        idUser={idUser}
+        selectedUser={selectedUser}
         showModal={showModalDelete}
         setShowModal={setShowModalDelete}
         onSubmit={refetchDoctors}
       />
-      <EditDoctorModal
+      {/* <EditDoctorModal
         showModal={showModalEdit}
         refetch={refetchDoctors}
         setShowModal={setShowModalEdit}
-      />
-      <NewDoctorModal
+        selectedUser={selectedUser}
+      /> */}
+      {/* <NewDoctorModal
         showModal={showModalNewUser}
         refetch={refetchDoctors}
         setShowModal={setShowModalNewUser}
-      />
+      /> */}
       <div className="md:flex justify-between items-center w-full">
         <SearchInput
           onSubmit={handleSubmit}
@@ -108,19 +111,23 @@ export default function Doctors({
           control={control}
           placeholder="Search doctors"
         />
-        <div className="flex fixed z-20 bottom-2 right-2 md:static">
+        {/* <div className="flex fixed z-20 bottom-2 right-2 md:static">
           <ButtonAdd
             nameButton="New doctor"
             handleButton={() => setShowModalNewUser(true)}
           />
-        </div>
+        </div> */}
       </div>
       <div>
         <p className="title-section">Doctors</p>
       </div>
 
       <div>
-        <Table table={table} onDropdownSelect={handledDropDownSelect} />
+        <Table
+          table={table}
+          dropDownActions={["Delete"]}
+          onDropdownSelect={handledDropDownSelect}
+        />
       </div>
     </div>
   );

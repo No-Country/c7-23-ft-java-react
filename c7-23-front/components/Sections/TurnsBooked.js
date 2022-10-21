@@ -17,13 +17,6 @@ import {
 import { useGetTurns } from "../../queries";
 
 export default function TurnsBooked({
-  idUser,
-  showModalNewUser,
-  setShowModalNewUser,
-  showModalEdit,
-  setShowModalEdit,
-  showModalDelete,
-  setShowModalDelete,
   handleSubmit,
   onSearch,
   control,
@@ -32,7 +25,7 @@ export default function TurnsBooked({
   setGlobalFilter,
   globalFilter,
 }) {
-  const { data, refetch } = useGetTurns();
+  const { data } = useGetTurns();
 
   const turnsBookedFilter = useCallback(() => {
     return data?.filter((turn) => {
@@ -49,11 +42,11 @@ export default function TurnsBooked({
         header: () => "idTurn",
         footer: (info) => info.column.id,
       }),
-      columnHelper.accessor("patient", {
+      columnHelper.accessor("idPatient", {
         id: "idPatient",
         header: () => "Patient",
         cell: (info) => {
-          return info.getValue()?.name ?? "Without patient :C";
+          return info.getValue();
         },
         footer: (info) => info.column.id,
       }),
@@ -91,25 +84,8 @@ export default function TurnsBooked({
     getFilteredRowModel: getFilteredRowModel(),
   });
 
-  console.log(table);
   return (
     <div>
-      <DeleteUserModal
-        idUser={idUser}
-        showModal={showModalDelete}
-        setShowModal={setShowModalDelete}
-        onSubmit={refetch}
-      />
-      <EditUserModal
-        showModal={showModalEdit}
-        refetch={refetch}
-        setShowModal={setShowModalEdit}
-      />
-      <NewUserModal
-        showModal={showModalNewUser}
-        refetch={refetch}
-        setShowModal={setShowModalNewUser}
-      />
       <div className="md:flex justify-between items-center w-full">
         <SearchInput
           onSubmit={handleSubmit}
@@ -128,6 +104,7 @@ export default function TurnsBooked({
           table={table}
           onDropdownSelect={handledDropDownSelect}
           dropDownActions={LIST_OF_DROPDOWN_ACTIONS_TURNS}
+          showDropDown={false}
         />
       </div>
     </div>

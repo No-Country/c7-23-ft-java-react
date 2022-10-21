@@ -13,13 +13,17 @@ import { DOCUMENT_TYPE_OPTIONS } from "shared/constants";
 import Toast from "components/Toast";
 import { MENSSAGE_HTTP_ERROR } from "shared/constants";
 import { useNewDoctor } from "queries";
+import Checkbox from "forms/inputs/Checkbox";
 
 export default function NewDoctorModal({ showModal, setShowModal, refetch }) {
-  const { mutate: register, isLoading, codeHttp, isError } = useNewDoctor();
+  const { mutate, isLoading, codeHttp, isError } = useNewDoctor();
   const {
     handleSubmit,
+    register,
     control,
     formState: { isValid },
+    setValue,
+    getValues,
   } = useForm({
     resolver: yupResolver(registerSchema),
     defaultValues: {
@@ -30,13 +34,13 @@ export default function NewDoctorModal({ showModal, setShowModal, refetch }) {
       email: "",
       password: "",
       attentionTurn: [],
-      attentinonDays: ["FRIDAY"],
+      attentinonDays: [],
     },
     mode: "onChange",
   });
 
   const onSubmit = (data) => {
-    register(data, {
+    mutate(data, {
       onSuccess: () => {
         refetch();
       },
@@ -46,9 +50,35 @@ export default function NewDoctorModal({ showModal, setShowModal, refetch }) {
     });
   };
 
+  const handleChangeDays = (day) => {
+    const { attentinonDays = [] } = getValues();
+
+    if (attentinonDays.includes(day)) {
+      setValue(
+        "attentinonDays",
+        attentinonDays.filter((currentDay) => currentDay !== day)
+      );
+    } else {
+      setValue("attentinonDays", [...attentinonDays, day]);
+    }
+  };
+
+  const handleChangeTurns = (turn) => {
+    const { attentionTurn = [] } = getValues();
+
+    if (attentionTurn.includes(turn)) {
+      setValue(
+        "attentionTurn",
+        attentionTurn.filter((currentTurn) => currentTurn !== turn)
+      );
+    } else {
+      setValue("attentionTurn", [...attentionTurn, turn]);
+    }
+  };
+
   return (
     <Modal
-      title="New user"
+      title="New doctor"
       showModal={showModal}
       setShowModal={setShowModal}
       showClose={!isLoading}
@@ -82,6 +112,30 @@ export default function NewDoctorModal({ showModal, setShowModal, refetch }) {
           control={control}
           type="email"
         />
+        <p>weeks</p>
+        <div>
+          {["FRIDAY", "MONDAY"].map((day) => (
+            <Checkbox
+              key={day}
+              value={day}
+              label={day}
+              ref={register}
+              onChange={() => handleChangeDays(day)}
+            />
+          ))}
+        </div>
+        <p>Turns</p>
+        <div>
+          {["Moning", "night"].map((turn, index) => (
+            <Checkbox
+              key={turn}
+              value={index + 1}
+              label={turn}
+              ref={register}
+              onChange={() => handleChangeTurns(index)}
+            />
+          ))}
+        </div>
         <PasswordInput label="Password" name="password" control={control} />
 
         <SummitButton

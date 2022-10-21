@@ -70,7 +70,7 @@ export default function Table({
                       )}
                 </th>
               ))}
-              <th className="rounded-r-lg"></th>
+              {showDropDown && <th className="rounded-r-lg"></th>}
             </tr>
           ))}
         </tfoot>

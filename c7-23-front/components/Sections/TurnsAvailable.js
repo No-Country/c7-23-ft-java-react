@@ -2,11 +2,8 @@ import { useMemo } from "react";
 
 import { LIST_OF_DROPDOWN_ACTIONS_TURNS } from "../../shared/constants/dropDownActions";
 
-import DeleteUserModal from "../../modals/DeleteUserModal";
-import EditUserModal from "../../modals/EditUserModal";
 import NewUserModal from "../../modals/NewUserModal";
 import Table from "../Admin/Table";
-import ButtonAdd from "../ButtonAdd";
 import SearchInput from "../SeachInput";
 import {
   useReactTable,
@@ -16,15 +13,14 @@ import {
 } from "@tanstack/react-table";
 
 import { useGetTurns } from "../../queries";
+import AssignTurnModal from "modals/turn/AssignTurnModal";
 
 export default function TurnsAvailable({
-  idUser,
+  selectedUser,
   showModalNewUser,
   setShowModalNewUser,
   showModalEdit,
   setShowModalEdit,
-  showModalDelete,
-  setShowModalDelete,
   handleSubmit,
   onSearch,
   control,
@@ -88,21 +84,11 @@ export default function TurnsAvailable({
   });
   return (
     <div>
-      <DeleteUserModal
-        idUser={idUser}
-        showModal={showModalDelete}
-        setShowModal={setShowModalDelete}
-        onSubmit={refetch}
-      />
-      <EditUserModal
+      <AssignTurnModal
         showModal={showModalEdit}
         refetch={refetch}
+        selectedUser={selectedUser}
         setShowModal={setShowModalEdit}
-      />
-      <NewUserModal
-        showModal={showModalNewUser}
-        refetch={refetch}
-        setShowModal={setShowModalNewUser}
       />
       <div className="md:flex justify-between items-center w-full">
         <SearchInput

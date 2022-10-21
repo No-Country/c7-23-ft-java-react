@@ -11,11 +11,16 @@ import { usePacthDoctor } from "../../queries/index.js";
 import SelectInput from "forms/inputs/selectInput.js";
 import PasswordInput from "forms/inputs/PasswordInput.js";
 import Toast from "components/Toast/index.js";
-import Checkbox from "forms/inputs/Checkbox.js";
+import Toggle from "forms/inputs/Toggle.js";
 
 import { DOCUMENT_TYPE_OPTIONS } from "shared/constants/index.js";
 
-export default function EditDoctorModal({ showModal, setShowModal, refetch }) {
+export default function EditDoctorModal({
+  showModal,
+  setShowModal,
+  refetch,
+  selectedUser,
+}) {
   const { mutate: edit, isLoading, isError } = usePacthDoctor();
 
   const {
@@ -33,14 +38,25 @@ export default function EditDoctorModal({ showModal, setShowModal, refetch }) {
       password: "",
       morning: 1,
       night: 2,
-      attentionTurn: [],
+      attentionTurn: [1, 2],
       attentinonDays: ["FRIDAY"],
     },
     mode: "onChange",
   });
 
   const onSubmit = (data) => {
-    edit(data, {
+    const body = {
+      id: selectedUser.id,
+      name: data.name,
+      lastName: data.lastName,
+      documentType: data.documentType,
+      document: data.document,
+      email: data.email,
+      password: data.password,
+      attentionTurn: data.attentionTurn,
+      attentionDays: data.attentinonDays,
+    };
+    edit(body, {
       onSuccess: () => {
         refetch();
       },
@@ -95,19 +111,19 @@ export default function EditDoctorModal({ showModal, setShowModal, refetch }) {
 
           <div>
             <p className="font-medium">Turnos</p>
-            <Checkbox label="morning" name="morning" control={control} />
-            <Checkbox label="night" name="nigth" control={control} />
+            <Toggle label="morning" name="morning" control={control} />
+            <Toggle label="night" name="nigth" control={control} />
           </div>
 
           <form>
             <p className="font-medium">Días de la semanas</p>
-            <Checkbox label="Mondey" name="morning" control={control} />
-            <Checkbox label="Tuesday" name="nigth" control={control} />
-            <Checkbox label="Wednesday" name="nigth" control={control} />
-            <Checkbox label="Thursday" name="nigth" control={control} />
-            <Checkbox label="Friday" name="nigth" control={control} />
-            <Checkbox label="Saturday" name="nigth" control={control} />
-            <Checkbox label="Sunday" name="nigth" control={control} />
+            <Toggle label="Mondey" name="morning" control={control} />
+            <Toggle label="Tuesday" name="nigth" control={control} />
+            <Toggle label="Wednesday" name="nigth" control={control} />
+            <Toggle label="Thursday" name="nigth" control={control} />
+            <Toggle label="Friday" name="nigth" control={control} />
+            <Toggle label="Saturday" name="nigth" control={control} />
+            <Toggle label="Sunday" name="nigth" control={control} />
           </form>
 
           <SummitButton

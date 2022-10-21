@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import SummitButton from "components/SummitButton.js/index.js";
 import Modal from "components/Modal.js";
-import Checkbox from "forms/inputs/Checkbox";
+import Toggle from "forms/inputs/Toggle";
 import Input from "forms/inputs/Input.js";
 import SelectInput from "forms/inputs/selectInput.js";
 
@@ -18,8 +18,6 @@ export default function EditUserModal({
   selectedUser,
 }) {
   const { mutate, isLoading } = usePacthPatient();
-
-  console.log(selectedUser, "id");
 
   const {
     handleSubmit,
@@ -43,14 +41,36 @@ export default function EditUserModal({
 
   const onSubmit = (data) => {
     console.log(selectedUser.idPatient, "id", data);
-    mutate(
-      { id: selectedUser.idPatiend, data },
-      {
-        onSettled: () => {
-          setShowModal(false);
-        },
-      }
-    );
+    const body = {
+      idPatient: selectedUser.idPatient,
+      name: data.name,
+      lastName: data.lastName,
+      documentTipe: data.documentType,
+      document: data.document,
+      email: data.email,
+      phone: data.phone,
+      particular: data.particular,
+      social_work: data.socialWork,
+      clinic_history: data.clinicHistory,
+    };
+
+    // const body = {
+    //   idPatient: selectedUser.idPatient,
+    //   name: data.name,
+    //   last_name: data.lastName,
+    //   documentType: data.documentType,
+    //   document: data.document,
+    //   email: data.email,
+    //   phone: data.phone,
+    //   particular: data.particular?.toString(),
+    //   social_work: data.socialWork,
+    //   clinic_history: data.clinicHistory,
+    // };
+    mutate(body, {
+      onSettled: () => {
+        setShowModal(false);
+      },
+    });
   };
 
   return (
@@ -103,7 +123,7 @@ export default function EditUserModal({
               control={control}
               type="tel"
             />
-            <Checkbox label="Particular" name="particular" control={control} />
+            <Toggle label="Particular" name="particular" control={control} />
             <SelectInput
               label="Social work"
               name="socialWork"

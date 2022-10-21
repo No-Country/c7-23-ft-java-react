@@ -29,7 +29,7 @@ export default function DeleteUserModal({
       setShowModal={setShowModal}
       showClose={!isLoading}
     >
-      <div className="flex w-32 justify-center">
+      <div className="flex w-full justify-center">
         <SummitButton
           buttonName="Accept"
           onClick={handleDelete}
