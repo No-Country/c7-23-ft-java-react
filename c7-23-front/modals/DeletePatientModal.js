@@ -1,16 +1,16 @@
 import Modal from "../components/Modal.js";
-import { useDelete } from "../queries/index.js";
+import { useDeletePatient } from "../queries/index.js";
 import SummitButton from "../components/SummitButton.js/index.js";
 import Toast from "../components/Toast/index.js";
 import { MENSSAGE_HTTP_ERROR } from "../shared/constants/index.js";
 
-export default function DeleteUserModal({
+export default function DeletePatientModal({
   showModal,
   setShowModal,
   idUser,
   onSubmit,
 }) {
-  const { mutate, isLoading, isError } = useDelete();
+  const { mutate, isLoading, isError } = useDeletePatient();
 
   const handleDelete = () => {
     mutate(idUser, {
@@ -24,12 +24,12 @@ export default function DeleteUserModal({
   };
   return (
     <Modal
-      title="Are you sure you want to delete the user?"
+      title="Are you sure you want to delete the patient?"
       showModal={showModal}
       setShowModal={setShowModal}
       showClose={!isLoading}
     >
-      <div className="flex w-32 justify-center">
+      <div className="flex w-full justify-center">
         <SummitButton
           buttonName="Accept"
           onClick={handleDelete}

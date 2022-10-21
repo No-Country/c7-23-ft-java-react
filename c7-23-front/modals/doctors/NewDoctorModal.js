@@ -1,20 +1,21 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { useNewUser } from "../queries";
-import { registerSchema } from "../forms/schemas/authSchemas";
+import { registerSchema } from "forms/schemas/authSchemas";
 
-import Modal from "../components/Modal.js/index.js";
-import PasswordInput from "../forms/inputs/PasswordInput";
-import Input from "../forms/inputs/Input";
-import SelectInput from "../forms/inputs/selectInput";
-import SummitButton from "../components/SummitButton.js";
-import { DOCUMENT_TYPE_OPTIONS } from "../shared/constants";
-import Toast from "../components/Toast";
-import { MENSSAGE_HTTP_ERROR } from "../shared/constants";
+import Modal from "components/Modal.js/index.js";
+//Simport Checkbox from "forms/inputs/Checkbox";
+import PasswordInput from "forms/inputs/PasswordInput";
+import Input from "forms/inputs/Input";
+import SelectInput from "forms/inputs/selectInput";
+import SummitButton from "components/SummitButton.js";
+import { DOCUMENT_TYPE_OPTIONS } from "shared/constants";
+import Toast from "components/Toast";
+import { MENSSAGE_HTTP_ERROR } from "shared/constants";
+import { useNewDoctor } from "queries";
 
-export default function NewUserModal({ showModal, setShowModal, refetch }) {
-  const { mutate: register, isLoading, codeHttp, isError } = useNewUser();
+export default function NewDoctorModal({ showModal, setShowModal, refetch }) {
+  const { mutate: register, isLoading, codeHttp, isError } = useNewDoctor();
   const {
     handleSubmit,
     control,
@@ -28,6 +29,8 @@ export default function NewUserModal({ showModal, setShowModal, refetch }) {
       document: "",
       email: "",
       password: "",
+      attentionTurn: [],
+      attentinonDays: ["FRIDAY"],
     },
     mode: "onChange",
   });
@@ -80,6 +83,7 @@ export default function NewUserModal({ showModal, setShowModal, refetch }) {
           type="email"
         />
         <PasswordInput label="Password" name="password" control={control} />
+
         <SummitButton
           buttonName="Register"
           isValid={isValid}

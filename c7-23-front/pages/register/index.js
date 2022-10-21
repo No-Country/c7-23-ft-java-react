@@ -54,7 +54,7 @@ export default function RegisterPage() {
       />
       <Input
         type="text"
-        inputmode="numeric"
+        inputMode="numeric"
         label="Document"
         placeholder="Document"
         name="document"

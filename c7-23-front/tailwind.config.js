@@ -5,6 +5,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
     "./forms/**/*.{js,ts,jsx,tsx}",
     "./containers/**/*.{js,ts,jsx,tsx}",
+    "./modals/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},
