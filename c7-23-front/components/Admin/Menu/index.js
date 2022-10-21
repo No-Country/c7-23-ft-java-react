@@ -31,9 +31,7 @@ export default function MenuBody({ menuList, user }) {
       </ul>
       <div className="cursor-pointer absolute bottom-4 font-semibold text-gray-600 flex justify-center items-center w-full md:w-auto md:fixed md:left-2 z-20">
         <Image alt="back icon" layout="fixed" src={ArrowLeftIcon} />
-        <Link href="/" onClick={logout}>
-          Log out
-        </Link>
+        <button onClick={logout}>Log out</button>
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ export default function Table({
   table,
   dropDownActions = LIST_OF_DROPDOWN_ACTIONS,
   onDropdownSelect,
+  showDropDown = true,
 }) {
   return (
     <div className="overflow-x-auto w-auto">
@@ -14,7 +15,10 @@ export default function Table({
           {table.getHeaderGroups().map((headerGroup) => (
             <tr className="first:static" key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <th key={header.id} className="bg-transparent th-static">
+                <th
+                  key={header.id}
+                  className="bg-transparent th-static text-center"
+                >
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -32,22 +36,24 @@ export default function Table({
               {row.getVisibleCells().map((cell) => (
                 <td
                   key={cell.id}
-                  className="border-none first:rounded-l-lg last:rounded-r-lg"
+                  className="border-none first:rounded-l-lg last:rounded-r-lg text-center"
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
-              <td className="rounded-r-lg">
-                <DropDown
-                  dropDownItems={dropDownActions.map((action, index) => ({
-                    id: index,
-                    name: action,
-                    value: action.toLowerCase(),
-                    rowID: table,
-                  }))}
-                  onSelect={(action) => onDropdownSelect(action, row)}
-                />
-              </td>
+              {showDropDown && (
+                <td className="rounded-r-lg">
+                  <DropDown
+                    dropDownItems={dropDownActions.map((action, index) => ({
+                      id: index,
+                      name: action,
+                      value: action.toLowerCase(),
+                      rowID: table,
+                    }))}
+                    onSelect={(action) => onDropdownSelect(action, row)}
+                  />
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
@@ -55,7 +61,7 @@ export default function Table({
           {table.getFooterGroups().map((footerGroup) => (
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (
-                <th className="th-static" key={header.id}>
+                <th className="th-static text-center" key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(

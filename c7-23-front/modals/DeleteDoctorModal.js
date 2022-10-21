@@ -1,16 +1,16 @@
 import Modal from "../components/Modal.js";
-import { useDelete } from "../queries/index.js";
+import { useDeleteDoctor } from "../queries/index.js";
 import SummitButton from "../components/SummitButton.js/index.js";
 import Toast from "../components/Toast/index.js";
 import { MENSSAGE_HTTP_ERROR } from "../shared/constants/index.js";
 
-export default function DeleteUserModal({
+export default function DeleteDoctorModal({
   showModal,
   setShowModal,
   idUser,
   onSubmit,
 }) {
-  const { mutate, isLoading, isError } = useDelete();
+  const { mutate, isLoading, isError } = useDeleteDoctor();
 
   const handleDelete = () => {
     mutate(idUser, {
@@ -24,7 +24,7 @@ export default function DeleteUserModal({
   };
   return (
     <Modal
-      title="Are you sure you want to delete the user?"
+      title="Are you sure you want to delete the doctor?"
       showModal={showModal}
       setShowModal={setShowModal}
       showClose={!isLoading}
