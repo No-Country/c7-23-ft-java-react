@@ -49,7 +49,7 @@ public class Patient implements Serializable {
     @Enumerated(value = EnumType.STRING)
     private DocumentType documentType;
     
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private Long document;
     
     @Column(length= 30, nullable=false)

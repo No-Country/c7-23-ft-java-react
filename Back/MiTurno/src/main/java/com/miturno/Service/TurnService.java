@@ -20,12 +20,14 @@ public interface TurnService {
     public List<TurnResponse> getTurns() throws NotFoundException;
     
     public TurnResponse getTurn(Long id) throws NotFoundException;
+      
+    public Turn getTurnById(Long id) throws NotFoundException;
     
     public void saveTurn(Turn turn) throws InvalidTurnException;
     
     public void deleteTurn(Long id) throws NotFoundException;
     
-    public void updateTurn(TurnResponse turn) throws InvalidTurnException;
+    public void updateTurn(TurnResponse turn) throws InvalidTurnException, NotFoundException;
     
     public void lockTurn(Turn turn) throws InvalidTurnException;
     

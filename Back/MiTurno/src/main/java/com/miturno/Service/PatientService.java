@@ -14,6 +14,8 @@ public interface PatientService {
 
     public PatientResponse getPatient(Long id) throws NotFoundException;
     
+    public Patient getPatientById(Long id) throws NotFoundException;
+    
     public Patient getPatientByDocument(Long document) throws NotFoundException;
     
     public Turn getLastTurnByDocument(Long document) throws NotFoundException;

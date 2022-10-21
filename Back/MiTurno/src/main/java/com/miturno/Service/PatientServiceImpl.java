@@ -43,10 +43,25 @@ public class PatientServiceImpl implements PatientService{
 
     @Override
     public PatientResponse getPatient(Long id) throws NotFoundException {
-        Patient pat = patientRepo.findById(id).orElse(null);
+//        Optional<Patient> response = patientRepo.findById(id);
+//        if(response.isPresent()) {
+//            PatientResponse patRes = mapper.patientToPatientResponse(response.get().g);
+//            return patRes;
+//        }
+//        else {
+//            return mapper.patientToPatientResponse(response.get());
+//        }
+        Patient pat  = patientRepo.findById(id).orElse(null);
         PatientResponse patient = mapper.patientToPatientResponse(pat);
         return patient;
     }
+
+    @Override
+    public Patient getPatientById(Long id) throws NotFoundException {
+        return patientRepo.findById(id).orElse(null);
+    }
+    
+    
 
     @Override
     public void savePatient(Patient patient) throws InvalidPatientException {

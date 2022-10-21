@@ -32,6 +32,12 @@ public class TurnServiceImpl implements TurnService{
 
     @Autowired
     private TurnResponseMapper mapper;
+    
+    @Autowired
+    private PatientService patServ;
+    
+    @Autowired
+    private DoctorService docServ;
 
     @Override
     public List<TurnResponse> getTurns() throws NotFoundException {
@@ -52,7 +58,7 @@ public class TurnServiceImpl implements TurnService{
     @Override
     public TurnResponse getTurn(Long id) throws NotFoundException {
         Optional<Turn> response = turnRepo.findById(id);
-
+        
         if (response.isPresent()){
             TurnResponse turnResponse = mapper.turnToTurnResponse(response.get());
             return turnResponse;
@@ -60,6 +66,13 @@ public class TurnServiceImpl implements TurnService{
             return mapper.turnToTurnResponse(response.get());
         }
     }
+
+    @Override
+    public Turn getTurnById(Long id) throws NotFoundException {
+        return turnRepo.findById(id).orElse(null);
+    }
+    
+    
 
     @Override
     public void saveTurn(Turn turn) throws InvalidTurnException {
@@ -74,8 +87,14 @@ public class TurnServiceImpl implements TurnService{
     }
 
     @Override
-    public void updateTurn(TurnResponse turn) throws InvalidTurnException {
-        Turn turno = mapper.TurnResponseToTurn(turn);
+    public void updateTurn(TurnResponse turn) throws InvalidTurnException, NotFoundException {
+        Turn turno = new Turn();
+        turno.setId(turn.getIdTurn());
+        turno.setPatient(patServ.getPatientById(turn.getIdPatient()));
+        turno.setDay(turn.getDay());
+        turno.setHora(turn.getHora());
+        turno.setDoctor(docServ.getDoctorById(turn.getIdDoctor()));
+        //Turn turno = mapper.TurnResponseToTurn(turn);
         turnRepo.save(turno);
     }
 

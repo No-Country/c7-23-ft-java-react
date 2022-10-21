@@ -72,6 +72,13 @@ public class DoctorServiceImpl implements DoctorService{
     }
 
     @Override
+    public Doctor getDoctorById(Long id) throws NotFoundException {
+        return docRepo.findById(id).orElse(null);
+    }
+    
+    
+
+    @Override
     public void saveDoctor(Doctor doctor) throws InvalidDoctorException {
         docRepo.save(doctor);
     }
