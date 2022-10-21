@@ -1,13 +1,18 @@
+import Head from "next/head";
 import ReactQueryContainer from "../containers/ReactQueryContainer";
-import Layout from "../components/Layout";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
     <ReactQueryContainer dehydratedState={pageProps.dehydratedState}>
-      <Layout>
+      <Head>
+        <link rel="icon" href="/assets/icons/favicon.ico" />
+      </Head>
+      <main data-theme="corporate">
         <Component {...pageProps} />
-      </Layout>
+      </main>
+      <ReactQueryDevtools initialIsOpen={false} />
     </ReactQueryContainer>
   );
 }

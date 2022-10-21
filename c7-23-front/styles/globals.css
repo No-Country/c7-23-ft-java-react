@@ -5,11 +5,34 @@
 @layer base {
   html {
     font-family: "Nunito", sans-serif;
+    scroll-behavior: smooth;
+  }
+}
+@layer utilities {
+  .th-static {
+    position: static !important;
+  }
+
+  .toastAnimation {
+    animation: toast 0.5s, fadeout 0.5s 2.5s;
+  }
+  @keyframes toast {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+    to {
+      bottom: 30px;
+      opacity: 1;
+    }
   }
 }
 
 @layer components {
   .form-input {
-    @apply rounded-xl block mb-4 w-full;
+    @apply rounded-xl block mb-1 w-full;
+  }
+  .title-section {
+    @apply font-medium text-lg;
   }
 }
