@@ -16,12 +16,13 @@ export function useNewPatient() {
 }
 
 export function usePacthPatient() {
-  const { mutate, isError, isSuccess, isLoading } = useMutation(
-    async (id, data) => {
-      const response = await patchPatient(id, data);
-      await queryClient.invalidateQueries(["patient"]);
-      return response;
-    }
-  );
-  return { mutate, isError, isSuccess, isLoading };
+  const queryClient = useQueryClient();
+
+  return useMutation(async ({ idPatient, ...data }) => {
+    const response = await patchPatient(idPatient, data);
+
+    await queryClient.invalidateQueries(["patients"]);
+
+    return response;
+  });
 }

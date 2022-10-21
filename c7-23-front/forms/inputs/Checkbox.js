@@ -1,26 +1,10 @@
-import { useController } from "react-hook-form";
-
-export default function Checkbox({ label, name, control }) {
-  const { field, fieldState } = useController({ name, control });
-
-  const isError = fieldState.error && fieldState.isTouched;
-
+export default function Checkbox({ label, ...props }) {
   return (
     <div className="form-control">
       <label className="label cursor-pointer">
         <span className="label-text">{label}</span>
-        <input
-          type="checkbox"
-          className="toggle"
-          {...field}
-          checked={field.value}
-        />
+        <input type="checkbox" className="checkbox" {...props} />
       </label>
-      {isError && (
-        <div className="mb-3">
-          <span className="text-error">{fieldState.error?.message}</span>
-        </div>
-      )}
     </div>
   );
 }

@@ -16,7 +16,7 @@ import { useGetPatients } from "queries";
 import NewPatientModal from "modals/patients/NewPatientModal";
 
 export default function Patients({
-  idUser,
+  selectedUser,
   showModalNewUser: showModalNewPatient,
   setShowModalNewUser,
   showModalEdit,
@@ -95,7 +95,7 @@ export default function Patients({
   return (
     <div>
       <DeletePatientModal
-        idUser={idUser}
+        selectedUser={selectedUser}
         showModal={showModalDelete}
         setShowModal={setShowModalDelete}
         onSubmit={refetch}
@@ -107,7 +107,7 @@ export default function Patients({
       <EditPatientModal
         showModal={showModalEdit}
         setShowModal={setShowModalEdit}
-        selectedUser={idUser}
+        selectedUser={selectedUser}
       />
 
       <div className="md:flex justify-between items-center w-full">

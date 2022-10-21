@@ -7,13 +7,13 @@ import { MENSSAGE_HTTP_ERROR } from "../shared/constants/index.js";
 export default function DeleteDoctorModal({
   showModal,
   setShowModal,
-  idUser,
+  selectedUser,
   onSubmit,
 }) {
   const { mutate, isLoading, isError } = useDeleteDoctor();
 
   const handleDelete = () => {
-    mutate(idUser, {
+    mutate(selectedUser.id, {
       onSuccess: () => {
         onSubmit();
       },
@@ -29,7 +29,7 @@ export default function DeleteDoctorModal({
       setShowModal={setShowModal}
       showClose={!isLoading}
     >
-      <div className="flex w-32 justify-center">
+      <div className="flex w-full justify-center">
         <SummitButton
           buttonName="Accept"
           onClick={handleDelete}

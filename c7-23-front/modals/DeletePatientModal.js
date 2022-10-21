@@ -7,13 +7,13 @@ import { MENSSAGE_HTTP_ERROR } from "../shared/constants/index.js";
 export default function DeletePatientModal({
   showModal,
   setShowModal,
-  idUser,
+  selectedUser,
   onSubmit,
 }) {
   const { mutate, isLoading, isError } = useDeletePatient();
 
   const handleDelete = () => {
-    mutate(idUser, {
+    mutate(selectedUser.idPatient, {
       onSuccess: () => {
         onSubmit();
       },

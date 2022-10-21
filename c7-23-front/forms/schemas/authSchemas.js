@@ -32,3 +32,9 @@ export const editSchema = yup.object().shape({
   email: yup.string().email("Enter a valid email"),
   password: yup.string(),
 });
+
+export const assignSchema = yup.object().shape({
+  idPatient: yup
+    .number("Enter a valid document number")
+    .typeError("Amount must be a number"),
+});
