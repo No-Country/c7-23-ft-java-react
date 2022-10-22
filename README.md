@@ -1,6 +1,6 @@
-# c7-23-ft-java-react
+# Mi Turno APP
 
- Mi Turno
+ 
  
  Mi turno es una aplicación que facilita la administración de turnos medicos o de especialidades. Tambien incluye un portal de presentación de la institución.
  La aplicación permite agregar medicos o especialistas, pacientes y sus respectivos turnos. Tambien los administradores tiene sus usuarios específicos.
