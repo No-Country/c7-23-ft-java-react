@@ -17,9 +17,9 @@
     
     
     Deploy APP Next/JS Vercel:
-    
+    |
     ---------->   https://c7-23-ft-java-react.vercel.app/   <----------
     
     Deploy API REST Heroku:
-    
+    |
     ---------->   https://grupo23miturnoapi.herokuapp.com/   <----------
